@@ -70,7 +70,8 @@
   :config
   (yh-font-initialize))
 
-(use-package yh-make :ensure nil)
+(use-package yh-make :ensure nil
+  :bind (("C-c C-j" . yh-make-insert-var)))
 
 (use-package yh-sh :ensure nil)
 

@@ -59,7 +59,12 @@
   :hook
   (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
 
-(use-package yh-docker :ensure nil)
+(use-package yh-docker :ensure nil
+  :hook
+  (dockerfile-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
 
 (use-package yh-font :ensure nil
   :config

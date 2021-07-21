@@ -69,7 +69,12 @@
 
 (use-package yh-sh :ensure nil)
 
-(use-package yh-sql :ensure nil)
+(use-package yh-sql :ensure nil
+  :hook
+  (sql-mode
+   .
+   (lambda ()
+     (add-hook 'after-save-hook 'yh-sql-format nil t))))
 
 (use-package lsp-mode
   :init

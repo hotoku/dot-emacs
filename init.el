@@ -113,11 +113,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
      ;; in poetry project
      ((locate-dominating-file default-directory "pyproject.toml")
       (setq-local lsp-pyright-venv-path
-                  (poetry-get-virtualenv)
-                  ;; (expand-file-name "site-packages"
-                  ;;                   (car (file-expand-wildcards
-                  ;;                         (expand-file-name "lib/python*" (poetry-get-virtualenv)))))
-                  )
+                  (poetry-get-virtualenv))
       (lsp))
      ;; in Pipenv project. but this branch is not tested.
      ((locate-dominating-file default-directory "Pipfile")

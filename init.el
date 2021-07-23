@@ -292,7 +292,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package helm-ag
   :defer t
   :init
-  (setq helm-ag-base-command "rg"))
+  (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case"))
 
 (use-package hideshow
   :init

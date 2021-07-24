@@ -30,12 +30,16 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
                          ("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")))
 
-
-;;; package-refresh-contents
-(yh-doit-if-not-yet-today 'package-refresh-contents
-                          ".date-of-last-package-refresh-contents")
-
 (package-initialize)
+
+(let ((orig-value package-check-signature))
+  (setq package-check-signature nil)
+
+  (yh-doit-if-not-yet-today 'package-refresh-contents
+                            ".date-of-last-package-refresh-contents")
+  (package-install 'gnu-elpa-keyring-update)
+
+  (setq package-check-signature orig-value))
 
 
 ;;; my utilities
@@ -50,9 +54,7 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 (setq use-package-always-ensure t) ; automatically install missing packages
 
 
-;;; configuration of packages
-(use-package gnu-elpa-keyring-update) ; This should be first.
-
+;;; configuration of packagseo
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))

@@ -100,7 +100,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
   :hook
-  ((js-mode . lsp))
+  ((js-mode . lsp)
+   (c++-mode . lsp))
   :commands
   (lsp lsp-deferred))
 

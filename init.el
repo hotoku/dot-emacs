@@ -108,22 +108,6 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
-(use-package lsp-docker
-  :defer t
-  :config
-  (defvar lsp-docker-client-packages
-    '(lsp-clangd))
-
-  (defvar lsp-docker-client-configs
-    '((:server-id clangd :docker-server-id clangd-docker :server-command "/ccls/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04/bin/clangd")
-      (:server-id pyls :docker-server-id pyls-docker :server-command "pyls")))
-
-  ;; (lsp-docker-init-clients
-	;;  :path-mappings '(("/Users/hotoku/projects/hotoku/lineage" . "/projects"))
-	;;  :client-packages lsp-docker-client-packages
-	;;  :client-configs lsp-docker-client-configs)
-  :commands lsp-docker-init-clients)
-
 (use-package lsp-pyright
   :config
   (defvar python-shell-virtualenv-root "")

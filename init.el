@@ -70,30 +70,30 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 (use-package yh-blog :ensure nil)
 
 (use-package yh-fef :ensure nil
-             :hook
-             (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
+  :hook
+  (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
 
 (use-package yh-docker :ensure nil
-             :hook
-             (dockerfile-mode
-              .
-              (lambda ()
-                (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
+  :hook
+  (dockerfile-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
 
 (use-package yh-font :ensure nil
-             :config
-             (yh-font-initialize))
+  :config
+  (yh-font-initialize))
 
 (use-package yh-make :ensure nil)
 
 (use-package yh-sh :ensure nil)
 
 (use-package yh-sql :ensure nil
-             :hook
-             (sql-mode
-              .
-              (lambda ()
-                (add-hook 'after-save-hook 'yh-sql-format nil t))))
+  :hook
+  (sql-mode
+   .
+   (lambda ()
+     (add-hook 'after-save-hook 'yh-sql-format nil t))))
 
 (use-package lsp-mode
   :init

@@ -10,6 +10,8 @@
   "Format buffer with zetasql-formatter.
 https://github.com/Matts966/zetasql-formatter."
   (interactive)
+  (unless (= 0 (call-process-shell-command "which zetasql-formatter"))
+    (error "Zetasql-formatter is not available"))
   (let* ((curbuf (current-buffer))
          (curpnt (point))
          (outbuf-name "*zetasql*")

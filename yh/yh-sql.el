@@ -19,16 +19,16 @@ https://github.com/Matts966/zetasql-formatter."
       (save-excursion
         (switch-to-buffer outbuf)
         (erase-buffer)))
-    (let ((ret (call-process-shell-command (format "zetasql-formatter %s" fpath)
-                                           nil outbuf-name))
-          ;; DIRTY HACK.
-          ;; zetasql-formatter return non-zero value when the formatted string is
-          ;; different from the original even if it was syntactically correct.
-          ;; Here, we want to change to *zetasql* buffern only when it is syntactically
-          ;; incorrect. We format the file twice and check the output of second run.
-          (ret2 (call-process-shell-command (format "zetasql-formatter %s" fpath)
-                                            nil outbuf-name)))
-      (if (= ret2 0)
+    ;; DIRTY HACK.
+    ;; zetasql-formatter return non-zero value when the formatted string is
+    ;; different from the original even if it was syntactically correct.
+    ;; Here, we want to change to *zetasql* buffern only when it is syntactically
+    ;; incorrect. We format the file twice and check the output of second run.
+    (let ((ret (progn (call-process-shell-command (format "zetasql-formatter %s" fpath)
+                                                  nil outbuf-name)
+                      (call-process-shell-command (format "zetasql-formatter %s" fpath)
+                                                  nil outbuf-name))))
+      (if (= ret 0)
           (progn (switch-to-buffer curbuf)
                  (revert-buffer t t)
                  (goto-char curpnt))))))

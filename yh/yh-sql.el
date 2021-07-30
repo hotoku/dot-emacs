@@ -8,7 +8,7 @@
 
 (defun yh-sql-format-command (fpath)
   "Return zetasql-formatter command for FPATH."
-  (if (= 0 (call-process-shell-command "which zetqsql-formatter"))
+  (if (= 0 (call-process-shell-command "which zetasql-formatter"))
       (format "zetasql-formatter %s" fpath)
     (let ((fname (file-name-nondirectory fpath))
           (dname (file-name-directory fpath)))

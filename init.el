@@ -464,9 +464,12 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (("\\.sh\\'" . shell-script-mode)
    ("\\.envrc\\'" . shell-script-mode))
   :config
-  (add-hook 'sh-mode-hook
-            #'(lambda () (add-hook 'after-save-hook 'yh/make-executable nil t)))
-  (define-key sh-mode-map (kbd "C-c C-j") 'yh-sh-insert-var))
+  (define-key sh-mode-map (kbd "C-c C-j") 'yh-sh-insert-var)
+  :hook
+  (sh-mode . (lambda ()
+               (yh-before-save :space :gap :indent)))
+  (sh-mode . (lambda ()
+               (add-hook 'after-save-hook 'yh/make-executable nil t))))
 
 
 ;;; misc

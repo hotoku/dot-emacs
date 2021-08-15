@@ -456,7 +456,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :config
   (define-key makefile-mode-map (kbd "C-c C-j") 'yh-make-insert-var)
   :hook
-  (makefile-bsdmake-mode . (yh-before-save2 :space :gap)))
+  (makefile-bsdmake-mode . (lambda ()
+                             (yh-before-save :space :gap))))
 
 (use-package sh-script
   :mode

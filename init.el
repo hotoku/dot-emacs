@@ -123,6 +123,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
     (cond
      ;; in poetry project
      ((locate-dominating-file default-directory "pyproject.toml")
+      (pyenv-mode-auto-hook)
       (setq-local lsp-pyright-venv-path
                   (poetry-get-virtualenv))
       (lsp))

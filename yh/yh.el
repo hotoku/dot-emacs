@@ -38,7 +38,8 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
 (defun yh/dired ()
   "Open current directory in dired."
   (interactive)
-  (dired default-directory))
+  (if (derived-mode-p 'dired-mode) (dired-jump)
+    (dired default-directory)))
 
 
 ;;; insert date, time

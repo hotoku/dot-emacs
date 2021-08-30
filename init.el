@@ -43,8 +43,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 
 ;;; my utilities
-(defconst yh/additional-loadpath (expand-file-name "yh" user-emacs-directory))
-(add-to-list 'load-path yh/additional-loadpath)
+(let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+  (normal-top-level-add-subdirs-to-load-path))
 
 
 ;;; use-package initialize
@@ -161,14 +161,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (global-company-mode)
   (setq-default company-idel-delay 0.01))
 
-(use-package desktop
-  :init
-  (desktop-save-mode)
-  :custom
-  (desktop-path (let ((path (expand-file-name ".desktop" user-emacs-directory)))
-                  (unless (file-exists-p path)
-                    (make-directory path))
-                  `(,path))))
+(use-package session)
 
 (use-package paren
   :init
@@ -536,7 +529,7 @@ This is inconvinient when opening file at the beginning of Emacs session."
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" "246cd0eb818bfd347b20fb6365c228fddf24ab7164752afe5e6878cb29b0204e" default))
  '(package-selected-packages
-   '(ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
+   '(session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

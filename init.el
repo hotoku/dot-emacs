@@ -127,16 +127,9 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
       (setq-local lsp-pyright-venv-path
                   (poetry-get-virtualenv))
       (lsp))
-     ;; in Pipenv project. but this branch is not tested.
-     ((locate-dominating-file default-directory "Pipfile")
-      (pyvenv-track-virtualenv)
-      (pipenv--force-wait (pipenv-venv))
-      (when python-shell-virtualenv-root
-        (setq-local pyvenv-activate (directory-file-name python-shell-virtualenv-root))
-        (setq-local python-shell-interpreter "pipenv")
-        (setq-local python-shell-interpreter-args "run jupyter console --simple-prompt")
-        (setq-local lsp-pyright-venv-path python-shell-virtualenv-root))
-      (lsp))
+     ;; with pyenv
+     ((executable-find "pyenv")
+      (pyenv-mode-version))
      (t
       (lsp))))
 

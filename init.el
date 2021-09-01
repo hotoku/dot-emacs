@@ -97,6 +97,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package yh-save :ensure nil)
 
+(use-package yh-pyenv :ensure nil)
+
 (use-package lsp-mode
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")

@@ -330,7 +330,10 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
    markdown-xhtml-body-epilogue "</div>")
   (bind-keys :map markdown-mode-map
              ("C-c d" . yh/insert-date)
-             ("C-c t" . yh/insert-time)))
+             ("C-c t" . yh/insert-time))
+  :hook
+  (markdown-mode . (lambda ()
+                     (yh-before-save :space :gap))))
 
 (use-package open-junk-file
   :commands open-junk-file)
@@ -470,10 +473,6 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (setq make-backup-files t)
 (add-to-list 'backup-directory-alist
 	           `("\\.*\\'" . ,(expand-file-name "~/backup")))
-
-;; meta key
-(setq ns-command-modifier (quote meta)
-      ns-alternate-modifier (quote super))
 
 ;; global key
 (progn

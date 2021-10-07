@@ -309,7 +309,11 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package json-mode
   :mode
   (("\\.json\\'" . json-mode)
-   ("\\.geojson\\'" . json-mode)))
+   ("\\.geojson\\'" . json-mode))
+
+  :hook
+  (json-mode . (lambda ()
+                 (yh-before-save :space :gap :indent))))
 
 (use-package markdown-mode
   :mode
@@ -373,7 +377,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
    (python-mode . turn-on-smartparens-strict-mode)
    (haskell-mode . turn-on-smartparens-strict-mode)
    (hcl-mode . turn-on-smartparens-strict-mode)
-   (bazel-mode . turn-on-smartparens-strict-mode))
+   (bazel-mode . turn-on-smartparens-strict-mode)
+   (json-mode . turn-on-smartparens-strict-mode))
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)))
 

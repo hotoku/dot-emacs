@@ -157,7 +157,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package company
   :config
   (global-company-mode)
-  (setq-default company-idel-delay 0.01))
+  (setq-default company-idel-delay 0.01)
+  (setq completion-styles '(flex)))
 
 (use-package session)
 
@@ -378,7 +379,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
    (haskell-mode . turn-on-smartparens-strict-mode)
    (hcl-mode . turn-on-smartparens-strict-mode)
    (bazel-mode . turn-on-smartparens-strict-mode)
-   (json-mode . turn-on-smartparens-strict-mode))
+   (json-mode . turn-on-smartparens-strict-mode)
+   (js-mode . turn-on-smartparens-strict-mode))
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)))
 

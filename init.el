@@ -372,15 +372,18 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :init
   (smartparens-global-mode)
   (show-smartparens-global-mode t)
+
   :hook
-  ((c-mode-common . turn-on-smartparens-strict-mode)
-   (emacs-lisp-mode . turn-on-smartparens-strict-mode)
-   (python-mode . turn-on-smartparens-strict-mode)
-   (haskell-mode . turn-on-smartparens-strict-mode)
-   (hcl-mode . turn-on-smartparens-strict-mode)
-   (bazel-mode . turn-on-smartparens-strict-mode)
-   (json-mode . turn-on-smartparens-strict-mode)
-   (js-mode . turn-on-smartparens-strict-mode))
+  ((c-mode-common
+    emacs-lisp-mode
+    python-mode
+    haskell-mode
+    hcl-mode
+    bazel-mode
+    js-mode
+    json-mode) .
+    turn-on-smartparens-strict-mode)
+
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)))
 

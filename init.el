@@ -307,6 +307,10 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :config
   (setq js-indent-level 2))
 
+(use-package js2-mode
+  :hook
+  ((js-mode . js2-minor-mode)))
+
 (use-package json-mode
   :mode
   (("\\.json\\'" . json-mode)

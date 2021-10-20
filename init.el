@@ -548,6 +548,7 @@ This is inconvinient when opening file at the beginning of Emacs session."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(js2-error ((t (:underline nil))))
  '(markdown-code-face ((t (:inherit fixed-pitch :background "SkyBlue1" :foreground "gray13"))))
  '(markdown-header-delimiter-face ((t (:foreground "indian red"))))
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :family "MeiryoKe_UIGothic"))))

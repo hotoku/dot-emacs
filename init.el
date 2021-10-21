@@ -549,6 +549,7 @@ This is inconvinient when opening file at the beginning of Emacs session."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js2-error ((t (:underline nil))))
+ '(js2-warning ((t (:underline nil))))
  '(lsp-face-highlight-textual ((t (:inherit highlight :foreground "dark cyan"))))
  '(markdown-code-face ((t (:inherit fixed-pitch :background "SkyBlue1" :foreground "gray13"))))
  '(markdown-header-delimiter-face ((t (:foreground "indian red"))))

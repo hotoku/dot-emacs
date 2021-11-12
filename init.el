@@ -111,8 +111,6 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package lsp-ui :commands lsp-ui-mode)
 
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
-
 (use-package lsp-pyright
   :config
   (defvar python-shell-virtualenv-root "")
@@ -264,29 +262,6 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package haskell-mode
   :mode
   (("\\.hs\\'" . haskell-mode)))
-
-(use-package helm
-  :bind (("M-x" . helm-M-x)
-	       ("M-y" . helm-show-kill-ring)
-	       ("C-x C-f" . helm-find-files)
-	       ("C-c h o" . helm-occur)
-	       ("C-c m" . helm-mini))
-  :hook
-  ((dired-mode . (lambda () (define-key dired-mode-map (kbd "j") 'helm-find-files))))
-  :config
-  (helm-mode 1)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-  (setq-default
-   helm-idle-delay 0.1
-   helm-input-idle-delay 0.1
-   helm-delete-minibuffer-contents-from-point t
-   helm-ff-auto-update-initial-value nil))
-
-(use-package helm-ag
-  :defer t
-  :init
-  (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case"))
 
 (use-package hideshow
   :init
@@ -486,6 +461,26 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :hook
   (json-mode . json-par-mode))
 
+(use-package swiper
+  :bind
+  (("M-s M-s" . swiper-thing-at-point)))
+
+(use-package ivy-hydra)
+
+(use-package ivy
+  :bind
+  (("C-c m" . ivy-switch-buffer))
+  :init
+  (ivy-mode 1)
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package counsel
+  :config
+  (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1)
+  (counsel-mode 1))
+
 
 ;;; misc
 ;; make backup files in a specific directory
@@ -526,16 +521,6 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 ;; language
 (setenv "LANG" "ja_JP.UTF-8")
 (set-language-environment "Japanese")
-
-;; change default directory for C-x C-f
-(when (version< "27.0" emacs-version)
-  (defun ad:helm-find-files (f prompt)
-    "In Emacs 27.1 on Mac OS X, default directory for buffers like *Emacs* changes from ~ to /.
-This is inconvinient when opening file at the beginning of Emacs session."
-    (when (equal default-directory "/")
-      (setq default-directory "~/"))
-    (funcall f prompt))
-  (advice-add 'helm-find-files :around 'ad:helm-find-files))
 
 
 ;;; custom

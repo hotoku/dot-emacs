@@ -473,6 +473,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :init
   (ivy-mode 1)
   (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  :config
+  (setq ivy-height 30)
   (setq ivy-use-virtual-buffers t))
 
 (use-package counsel

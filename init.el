@@ -476,7 +476,10 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (setq ivy-use-virtual-buffers t))
 
 (use-package counsel
+  :bind
+  (("C-c a" . counsel-ag))
   :config
+  (setq counsel-ag-base-command '("rg"  "--vimgrep" "--no-heading" "--smart-case" "%s"))
   (setq enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode 1)
   (counsel-mode 1))

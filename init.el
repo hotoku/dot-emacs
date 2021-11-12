@@ -465,7 +465,9 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :bind
   (("M-s M-s" . swiper-thing-at-point)))
 
-(use-package ivy-hydra)
+(use-package ivy-hydra
+  :config
+  (setq ivy-read-action-function 'ivy-hydra-read-action))
 
 (use-package ivy
   :bind

@@ -111,8 +111,6 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package lsp-ui :commands lsp-ui-mode)
 
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
-
 (use-package lsp-pyright
   :config
   (defvar python-shell-virtualenv-root "")
@@ -264,29 +262,6 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package haskell-mode
   :mode
   (("\\.hs\\'" . haskell-mode)))
-
-(use-package helm
-  :bind (("M-x" . helm-M-x)
-	       ("M-y" . helm-show-kill-ring)
-	       ("C-x C-f" . helm-find-files)
-	       ("C-c h o" . helm-occur)
-	       ("C-c m" . helm-mini))
-  :hook
-  ((dired-mode . (lambda () (define-key dired-mode-map (kbd "j") 'helm-find-files))))
-  :config
-  (helm-mode 1)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-  (setq-default
-   helm-idle-delay 0.1
-   helm-input-idle-delay 0.1
-   helm-delete-minibuffer-contents-from-point t
-   helm-ff-auto-update-initial-value nil))
-
-(use-package helm-ag
-  :defer t
-  :init
-  (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case"))
 
 (use-package hideshow
   :init
@@ -482,6 +457,37 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (sh-mode . (lambda ()
                (add-hook 'after-save-hook 'yh/make-executable nil t))))
 
+(use-package json-par
+  :hook
+  (json-mode . json-par-mode))
+
+(use-package swiper
+  :bind
+  (("M-s M-s" . swiper-thing-at-point)))
+
+(use-package ivy-hydra
+  :config
+  (setq ivy-read-action-function 'ivy-hydra-read-action))
+
+(use-package ivy
+  :bind
+  (("C-c m" . ivy-switch-buffer))
+  :init
+  (ivy-mode 1)
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  :config
+  (setq ivy-height 30)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package counsel
+  :bind
+  (("C-c a" . counsel-ag))
+  :config
+  (setq counsel-ag-base-command '("rg"  "--vimgrep" "--no-heading" "--smart-case" "%s"))
+  (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1)
+  (counsel-mode 1))
+
 
 ;;; misc
 ;; make backup files in a specific directory
@@ -523,16 +529,6 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (setenv "LANG" "ja_JP.UTF-8")
 (set-language-environment "Japanese")
 
-;; change default directory for C-x C-f
-(when (version< "27.0" emacs-version)
-  (defun ad:helm-find-files (f prompt)
-    "In Emacs 27.1 on Mac OS X, default directory for buffers like *Emacs* changes from ~ to /.
-This is inconvinient when opening file at the beginning of Emacs session."
-    (when (equal default-directory "/")
-      (setq default-directory "~/"))
-    (funcall f prompt))
-  (advice-add 'helm-find-files :around 'ad:helm-find-files))
-
 
 ;;; custom
 (custom-set-variables
@@ -543,7 +539,7 @@ This is inconvinient when opening file at the beginning of Emacs session."
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" "246cd0eb818bfd347b20fb6365c228fddf24ab7164752afe5e6878cb29b0204e" default))
  '(package-selected-packages
-   '(git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
+   '(json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

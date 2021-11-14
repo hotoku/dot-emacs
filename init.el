@@ -342,7 +342,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
              ("C-c t" . yh/insert-time))
   :hook
   (markdown-mode . (lambda ()
-                     (yh-before-save :space :gap))))
+                     (yh-before-save :space :gap)
+                     (setq-local yh-space-width 1))))
 
 (use-package open-junk-file
   :commands open-junk-file)
@@ -351,7 +352,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 
 (use-package prettier-js
   :hook
-  ((js-mode . prettier-js-mode)))
+  (((js-mode css-mode) . prettier-js-mode)))
 
 (use-package projectile
   :config

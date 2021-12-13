@@ -6,6 +6,12 @@
 
 ;;; Code:
 
+(defcustom yh-sql-do-format t
+  "A flag deciding actually format the buffer."
+  :type 'boolean
+  :group 'yh-sql
+  :safe 'booleanp)
+
 (defun yh-sql-format-command (fpath)
   "Return zetasql-formatter command for FPATH."
   (if (= 0 (call-process-shell-command "which zetasql-formatter"))

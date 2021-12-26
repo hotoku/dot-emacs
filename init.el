@@ -153,6 +153,13 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
    flycheck-emacs-lisp-load-path 'inherit)
   (add-hook 'after-init-hook 'global-flycheck-mode))
 
+(use-package conf-mode
+  :commands
+  (conf-toml-mode)
+  :hook
+  (conf-toml-mode . (lambda ()
+                      (yh-before-save :space :gap :indent))))
+
 (use-package magit
   :bind (("C-c g" . magit))
   :custom

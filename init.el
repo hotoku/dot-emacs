@@ -55,12 +55,13 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 
 ;;; configuration of packagseo
-(unless (require 'zetasql-formatter nil 'noerror)
-  (message "zetasql-formatter is not installed.")
-  (call-process-shell-command
-   "git clone git@github.com:hotoku/zetasql-formatter-el /tmp/zetasql-formatter-el"
-   nil "*install-zetasql-formatter-el*")
-  (package-install-file "/tmp/zetasql-formatter-el/zetasql-formatter.el"))
+(ignore-errors
+  (unless (require 'zetasql-formatter nil 'noerror)
+    (message "zetasql-formatter is not installed.")
+    (call-process-shell-command
+     "git clone git@github.com:hotoku/zetasql-formatter-el /tmp/zetasql-formatter-el"
+     nil "*install-zetasql-formatter-el*")
+    (package-install-file "/tmp/zetasql-formatter-el/zetasql-formatter.el")))
 
 (use-package gnu-elpa-keyring-update
   :config

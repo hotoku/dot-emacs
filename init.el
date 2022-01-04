@@ -587,6 +587,9 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
  '(markdown-header-face-4 ((t (:inherit markdown-header-face :height 1.2))))
  '(markdown-language-keyword-face ((t (:foreground "dark green"))))
  '(markdown-markup-face ((t (:foreground "indian red"))))
+ '(mode-line ((t (:background "brightblue" :foreground "white"))))
+ '(mode-line-inactive ((t (:background "white" :foreground "black"))))
+ '(mode-line-buffer-id ((t (:foreground "brightred"))))
  '(sp-pair-overlay-face ((t (:inherit fixed-pitch :background "SkyBlue1" :foreground "gray13")))))
 
 ;; Theme loading should be after registration of it as safe by custom-set-variables

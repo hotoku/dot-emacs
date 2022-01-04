@@ -55,8 +55,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 
 ;;; configuration of packagseo
-(ignore-errors
-  (unless (require 'zetasql-formatter nil 'noerror)
+(unless (featurep 'zetasql-formatter)
+  (ignore-errors
     (message "zetasql-formatter is not installed.")
     (call-process-shell-command
      "git clone git@github.com:hotoku/zetasql-formatter-el /tmp/zetasql-formatter-el"

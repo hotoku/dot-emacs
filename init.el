@@ -47,7 +47,68 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   (normal-top-level-add-subdirs-to-load-path))
 
 
+
+
+
+;;; use-package initialize
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t) ; automatically install missing packages
+
+
+;;; configuration of packagseo
+(unless (featurep 'zetasql-formatter)
+  (ignore-errors
+    (message "zetasql-formatter is not installed.")
+    (call-process-shell-command
+     "git clone git@github.com:hotoku/zetasql-formatter-el /tmp/zetasql-formatter-el"
+     nil "*install-zetasql-formatter-el*")
+    (package-install-file "/tmp/zetasql-formatter-el/zetasql-formatter.el")))
+
+(use-package gnu-elpa-keyring-update
+  :config
+  (unless (file-directory-p package-gnupghome-dir)
+    (make-directory package-gnupghome-dir))
+  (gnu-elpa-keyring-update))
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
+(use-package yh :ensure nil)
+
+(use-package yh-blog :ensure nil)
+
+(use-package yh-fef :ensure nil
+  :hook
+  (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
+
+(use-package yh-docker :ensure nil
+  :hook
+  (dockerfile-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
+
+(use-package yh-font :ensure nil
+  :config
+  (yh-font-initialize))
+
+(use-package yh-make :ensure nil)
+
+(use-package yh-sh :ensure nil)
+
+(use-package yh-save :ensure nil)
+
+(use-package yh-pyenv :ensure nil)
+
+
 (setq dired-listing-switches "-alh")
+
+
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

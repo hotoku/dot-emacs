@@ -173,6 +173,52 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 
 (use-package session)
 
+(use-package paren
+  :init
+  (show-paren-mode))
+
+(use-package dired
+  :ensure nil
+  :bind
+  ("C-x C-j" . yh/dired)
+  :config
+  (bind-key "z" 'yh/dired-do-open dired-mode-map)
+  (unless (equal (system-name) "JMB20200036.local")
+    ;; todo: この変数にhが入っていると、diredでディレクトリの色がおかしくなるときがある
+    ;;       ディレクトリがズラッと並んだディレクトリを表示すると、一行ごとに`default'と`dired-directory'が並んでいるように見える
+    (setq dired-listing-switches "-alh")))
+
+(use-package savehist
+  :init
+  (savehist-mode)
+  :custom
+  (savehist-additional-variables '(kill-ring)))
+
+(use-package ace-window
+  :bind (("C-x o" . ace-window)))
+
+(use-package bazel)
+
+(use-package biblio)
+
+(use-package cc-mode
+  :config
+  (add-hook 'c-mode-common-hook
+            #'(lambda ()
+                (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
+                (add-hook 'before-save-hook #'(lambda () (indent-region (point-min) (point-max))) nil t))))
+
+(use-package company-stan
+  :hook (stan-mode . company-stan-setup)
+  :config
+  (setq company-stan-fuzzy nil))
+
+(use-package dap-mode)
+
+(use-package dap-python :ensure nil)
+
+(use-package dired-x :ensure nil)
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

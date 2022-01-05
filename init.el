@@ -286,6 +286,164 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (add-hook 'emacs-lisp-mode-hook 'hs-hide-all 100)
   (add-hook 'python-mode-hook 'hs-minor-mode))
 
+(use-package highlight-indentation
+  :hook ((yaml-mode . highlight-indentation-mode)
+         (yaml-mode . highlight-indentation-current-column-mode))
+  :config
+  (set-face-background 'highlight-indentation-face "gray36")
+  (set-face-background 'highlight-indentation-current-column-face "SteelBlue3"))
+
+(use-package js
+  :init
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . javascript-mode))
+  :config
+  (setq js-indent-level 2))
+
+(use-package js2-mode
+  :hook
+  ((js-mode . js2-minor-mode)))
+
+(use-package json-mode
+  :mode
+  (("\\.json\\'" . json-mode)
+   ("\\.geojson\\'" . json-mode))
+
+  :hook
+  (json-mode . (lambda ()
+                 (yh-before-save :space :gap :indent))))
+
+(use-package markdown-mode
+  :mode
+  (("\\.md\\'" . markdown-mode))
+  :config
+  (setq
+   ;; commonmarker command can be installed by "gem install -V commonmarker -n <destination directory>"
+   markdown-command "commonmarker --extension=autolink --extension=strikethrough --extension=table --extension=tagfilter --extension=tasklist"
+   markdown-command-needs-filename t
+   markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css"
+                        "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css")
+   markdown-xhtml-header-content (mapconcat 'identity
+                                            '("<style><!-- CSS HERE --></style>"
+                                              "<script src=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js\"></script>"
+                                              "<script>hljs.initHighlightingOnLoad();</script>")
+                                            "\n")
+   markdown-xhtml-body-preamble "<div class=\"markdown-body\">"
+   markdown-xhtml-body-epilogue "</div>")
+  (bind-keys :map markdown-mode-map
+             ("C-c d" . yh/insert-date)
+             ("C-c t" . yh/insert-time))
+  :hook
+  (markdown-mode . (lambda ()
+                     (yh-before-save :space :gap)
+                     (setq-local yh-space-width 1)
+                     (toggle-truncate-lines -1))))
+
+(use-package open-junk-file
+  :commands open-junk-file)
+
+(use-package poetry)
+
+(use-package prettier-js
+  :hook
+  (((js-mode css-mode) . prettier-js-mode)))
+
+(use-package projectile
+  :config
+  (projectile-mode 1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+(use-package py-autopep8
+  :hook (python-mode . py-autopep8-enable-on-save))
+
+(use-package pyenv-mode-auto)
+
+(use-package python
+  :ensure nil
+  :hook
+  (python-mode . (lambda ()
+                   (add-hook 'after-save-hook 'yh/make-executable nil t)))
+  (python-mode . (lambda ()
+                   (set (make-local-variable 'compile-command)
+                        (concat "pysen run_files lint --error-format gnu  " buffer-file-name)))))
+
+(use-package smartparens
+  :init
+  (smartparens-global-mode)
+  (show-smartparens-global-mode t)
+  (setq sp-no-reindent-after-kill-modes (cons 'makefile-bsdmake-mode sp-no-reindent-after-kill-modes))
+
+  :hook
+  ((c-mode-common
+    emacs-lisp-mode
+    python-mode
+    haskell-mode
+    hcl-mode
+    bazel-mode
+    js-mode
+    json-mode) .
+    turn-on-smartparens-strict-mode)
+
+  :bind (("C-M-f" . sp-forward-slurp-sexp)
+         ("C-M-g" . sp-forward-barf-sexp)))
+
+(use-package smartparens-config :ensure nil)
+
+(use-package stan-mode
+  :mode ("\\.stan\\'" . stan-mode)
+  :hook (stan-mode . stan-mode-setup)
+  :config
+  (setq stan-indentation-offset 2))
+
+(use-package stan-snippets
+  :hook (stan-mode . stan-snippets-initialize))
+
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t))
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
+(use-package yaml-mode
+  :mode
+  (("\\.ya?ml\\'" . yaml-mode)))
+
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
+  (yas-global-mode 1))
+
+(use-package yatex
+
+  ;; cf. https://zenn.dev/maswag/books/latex-on-emacs/viewer/yatex
+  :commands (yatex-mode)
+  :mode (("\\.tex$" . yatex-mode)
+         ("\\.ltx$" . yatex-mode)
+         ("\\.cls$" . yatex-mode)
+         ("\\.sty$" . yatex-mode)
+         ("\\.clo$" . yatex-mode)
+         ("\\.bbl$" . yatex-mode))
+  :init
+  (setq YaTeX-inhibit-prefix-letter t)
+  ;; :config キーワードはライブラリをロードした後の設定などを記述します。
+  :config
+  (setq YaTeX-kanji-code nil)
+  (setq YaTeX-latex-message-code 'utf-8)
+  (setq YaTeX-use-LaTeX2e t)
+  (setq YaTeX-use-AMS-LaTeX t)
+  (setq tex-command "mytex")
+  (setq tex-pdfview-command "/usr/bin/open -a Skim")
+  (auto-fill-mode 0)
+  ;; company-tabnineによる補完。companyについては後述
+  (set (make-local-variable 'company-backends) '(company-tabnine))
+  ;; keys
+  (add-hook 'yatex-mode-hook
+            '(lambda ()
+               (local-set-key (kbd "C-c C-f") 'yh/insert-subscript)
+               (local-set-key (kbd "C-c C-g") 'yh/insert-superscript))))
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

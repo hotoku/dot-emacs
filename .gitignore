@@ -18,3 +18,4 @@ flycheck_*
 /history
 /.emacs.desktop
 /eshell/
+orig.el

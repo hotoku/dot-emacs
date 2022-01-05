@@ -451,6 +451,77 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (dired-after-readin . dired-k-no-revert)
   (dired-initial-position . dired-k))
 
+(use-package hcl-mode)
+
+(use-package ppp)
+
+(use-package make-mode
+  :defer t
+  :config
+  (define-key makefile-mode-map (kbd "C-c C-j") 'yh-make-insert-var)
+  :hook
+  ((makefile-bsdmake-mode makefile-gmake-mode) .
+   (lambda ()
+     (yh-before-save :space :gap))))
+
+(use-package sh-script
+  :mode
+  (("\\.sh\\'" . shell-script-mode)
+   ("\\.envrc\\'" . shell-script-mode))
+  :config
+  (define-key sh-mode-map (kbd "C-c C-j") 'yh-sh-insert-var)
+  :hook
+  (sh-mode . (lambda ()
+               (yh-before-save :space :gap :indent)))
+  (sh-mode . (lambda ()
+               (add-hook 'after-save-hook 'yh/make-executable nil t))))
+
+(use-package json-par
+  :hook
+  (json-mode . json-par-mode))
+
+(use-package swiper
+  :bind
+  (("M-s M-s" . swiper-thing-at-point)))
+
+(use-package ivy-hydra
+  :config
+  (setq ivy-read-action-function 'ivy-hydra-read-action))
+
+(use-package ivy
+  :bind
+  (("C-c m" . ivy-switch-buffer))
+  :init
+  (ivy-mode 1)
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  :config
+  (setq ivy-height 30)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package counsel
+  :bind
+  (("C-c a" . counsel-ag))
+  :config
+  (setq counsel-ag-base-command '("rg"  "--vimgrep" "--no-heading" "--smart-case" "%s"))
+  (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1)
+  (counsel-mode 1))
+
+(use-package terraform-mode)
+
+(use-package helpful
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-c C-d" . helpful-at-point)
+   ("C-c F" . helpful-function))
+  :init
+  (setq counsel-describe-function-function 'helpful-callable)
+  (setq counsel-describe-variable-function 'helpful-variable))
+
+(use-package color-moccur)
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

@@ -183,7 +183,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   ("C-x C-j" . yh/dired)
   :config
   (bind-key "z" 'yh/dired-do-open dired-mode-map)
-  (setq dired-listing-switches "-alh"))
+  (unless (equal system-name "JMB20200036.local")
+    (setq dired-listing-switches "-alh")))
 
 (use-package savehist
   :init

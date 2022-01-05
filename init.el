@@ -459,8 +459,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   :hook
   ((makefile-bsdmake-mode makefile-gmake-mode) .
    (lambda ()
-     (yh-before-save :space :gap)
-     (setq-local indent-line-function '(lambad ())))))
+     (yh-before-save :space :gap))))
 
 (use-package sh-script
   :mode

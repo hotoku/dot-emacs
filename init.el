@@ -601,22 +601,19 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (load-theme 'afternoon))
 
 ;; mode line color settings
-(progn
-  (defvar yh-mode-line-colors
-    (cond
-     ((not window-system) ; on terminal
-      '((mode-line--background . "brightblue")
-        (mode-line--foreground . "black")
-        (moee-line-buffer-id--foreground . "brightyellow")
-        (mode-line-inactive--background . "white")
-        (mode-line-inactive--foreground . "brightblack")))
-     ((eq window-system 'ns) ; on mac GUI
-      '((mode-line--background . "black")
-        (mode-line--foreground . "white")
-        (mode-line-buffer-id--foreground . "red")
-        (mode-line-inactive--background . "white")
-        (mode-line-inactive--foreground . "gray")))))
-
+(let ((yh-mode-line-colors (cond
+                            ((not window-system) ; on terminal
+                             '((mode-line--background . "brightblue")
+                               (mode-line--foreground . "black")
+                               (moee-line-buffer-id--foreground . "brightyellow")
+                               (mode-line-inactive--background . "white")
+                               (mode-line-inactive--foreground . "brightblack")))
+                            ((eq window-system 'ns) ; on mac GUI
+                             '((mode-line--background . "black")
+                               (mode-line--foreground . "white")
+                               (mode-line-buffer-id--foreground . "red")
+                               (mode-line-inactive--background . "white")
+                               (mode-line-inactive--foreground . "gray"))))))
   (set-face-foreground 'mode-line (alist-get 'mode-line--foreground yh-mode-line-colors))
   (set-face-foreground 'mode-line-buffer-id (alist-get 'mode-line-buffer-id--foreground yh-mode-line-colors))
   (set-face-foreground 'mode-line-inactive (alist-get 'mode-line-inactive--foreground yh-mode-line-colors))

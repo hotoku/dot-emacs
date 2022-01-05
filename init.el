@@ -47,9 +47,6 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   (normal-top-level-add-subdirs-to-load-path))
 
 
-
-
-
 ;;; use-package initialize
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
@@ -103,11 +100,80 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package yh-pyenv :ensure nil)
 
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((js-mode . lsp)
+   (c++-mode . lsp))
+  :commands
+  (lsp lsp-deferred))
+
+(use-package lsp-ui :commands lsp-ui-mode)
+
+(use-package lsp-pyright
+  :config
+  (defvar python-shell-virtualenv-root "")
+  (defvar python-shell-interpreter "")
+  (defvar python-shell-interpreter-args "")
+  (defvar pyvenv-activate "")
+  (defun yh/lsp-pyright-setup ()
+    "Setup python environment. Inspired from ncaq's init.el.
+https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/init.el#L1321"
+    (cond
+     ;; in poetry project
+     ((locate-dominating-file default-directory "pyproject.toml")
+      (pyenv-mode-auto-hook)
+      (setq-local lsp-pyright-venv-path
+                  (poetry-get-virtualenv))
+      (lsp))
+     ;; with pyenv
+     ((executable-find "pyenv")
+      (setq-local
+       lsp-pyright-venv-path
+       (yh-pyenv-directory))
+      (lsp))
+     (t
+      (lsp))))
+  (defun yh/reset-pyright-poetry ()
+    "Reset lsp setting with poetry."
+    (interactive)
+    (setq-local lsp-pyright-venv-path
+                (poetry-get-virtualenv))
+    (lsp))
+
+  :hook
+  (python-mode . yh/lsp-pyright-setup))
+
+(use-package flycheck
+  :config
+  (setq
+   flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+   flycheck-idle-change-delay 1
+   flycheck-emacs-lisp-load-path 'inherit)
+  (add-hook 'after-init-hook 'global-flycheck-mode))
+
+(use-package conf-mode
+  :commands
+  (conf-toml-mode)
+  :hook
+  (conf-toml-mode . (lambda ()
+                      (yh-before-save :space :gap :indent))))
+
+(use-package magit
+  :bind (("C-c g" . magit))
+  :custom
+  (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits"))
+
+(use-package company
+  :config
+  (global-company-mode)
+  (setq-default company-idel-delay 0.01))
+
+(use-package session)
 
 (setq dired-listing-switches "-alh")
-
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

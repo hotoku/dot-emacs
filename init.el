@@ -446,6 +446,11 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 
 (use-package direx)
 
+(use-package dired-k
+  :hook
+  (dired-after-readin . dired-k-no-revert)
+  (dired-initial-position . dired-k))
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

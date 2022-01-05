@@ -527,7 +527,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 ;; make backup files in a specific directory
 (setq make-backup-files t)
 (add-to-list 'backup-directory-alist
-	     `("\\.*\\'" . ,(expand-file-name "~/backup")))
+	           `("\\.*\\'" . ,(expand-file-name "~/backup")))
 
 ;; global key
 (progn
@@ -546,18 +546,56 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 ;; truncate lines
 (setq-default truncate-lines t)
 
-(setq dired-listing-switches "-alh")
+;; always answer in y or n
+(fset 'yes-or-no-p 'y-or-n-p)
 
+;; emacsclient
+(server-start)
+
+;; aes
+(progn
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (column-number-mode)
+  (blink-cursor-mode -1))
+
+;; language
+(setenv "LANG" "ja_JP.UTF-8")
+(set-language-environment "Japanese")
+
+
+;;; custom
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" "246cd0eb818bfd347b20fb6365c228fddf24ab7164752afe5e6878cb29b0204e" default))
  '(package-selected-packages
    '(zetasql-formatter yatex yaml-mode which-key use-package undo-tree terraform-mode stan-snippets smartparens session pyenv-mode-auto py-autopep8 projectile prettier-js ppp poetry open-junk-file magit lsp-ui lsp-pyright lsp-docker json-par js2-mode ivy-hydra highlight-indentation helpful helm-lsp helm-ag haskell-mode gnu-elpa-keyring-update gitignore-mode git-ps1-mode git-modes flymake-yaml flycheck-stan exec-path-from-shell emojify eldoc-stan dockerfile-mode direx dired-k dap-mode counsel company-stan color-moccur biblio bazel afternoon-theme)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(js2-error ((t (:underline nil))))
+ '(js2-warning ((t (:underline nil))))
+ '(lsp-face-highlight-textual ((t (:inherit highlight :foreground "dark cyan"))))
+ '(markdown-code-face ((t (:inherit fixed-pitch :background "SkyBlue1" :foreground "gray13"))))
+ '(markdown-header-delimiter-face ((t (:foreground "indian red"))))
+ '(markdown-header-face ((t (:inherit font-lock-function-name-face :family "MeiryoKe_UIGothic"))))
+ '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 2.0 :underline t))))
+ '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.6))))
+ '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.4))))
+ '(markdown-header-face-4 ((t (:inherit markdown-header-face :height 1.2))))
+ '(markdown-language-keyword-face ((t (:foreground "dark green"))))
+ '(markdown-markup-face ((t (:foreground "indian red"))))
+ '(sp-pair-overlay-face ((t (:inherit fixed-pitch :background "SkyBlue1" :foreground "gray13")))))
+
+(setq dired-listing-switches "-alh")
+
+
+

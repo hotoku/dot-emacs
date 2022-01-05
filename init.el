@@ -219,6 +219,73 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 
 (use-package dired-x :ensure nil)
 
+(use-package dockerfile-mode)
+
+(use-package eldoc-stan
+  :hook (stan-mode . eldoc-stan-setup))
+
+(use-package flycheck-stan
+  :hook ((stan-mode . flycheck-stan-stanc2-setup)
+         (stan-mode . flycheck-stan-stanc3-setup))
+  :config
+  (setq flycheck-stanc-executable nil)
+  (setq flycheck-stanc3-executable nil))
+
+(use-package flymake-yaml
+  :hook (yaml-mode . flymake-yaml-load))
+
+(use-package elisp-mode
+  :ensure nil
+  :hook
+  (emacs-lisp-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh/indent-buffer nil t)
+     (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
+     (add-hook 'before-save-hook 'yh-fef-format-buffer nil t)
+     (local-set-key (kbd "RET") 'yh/ret-hs)
+     (add-hook 'after-save-hook
+               #'(lambda ()
+                   (save-excursion
+                     (hs-hide-all)
+                     (hs-show-block))) nil t)
+     (emojify-mode -1))))
+
+(use-package emojify
+  :if (display-graphic-p)
+  :hook (after-init . global-emojify-mode)
+  :bind
+  ("C-x e" . 'emojify-insert-emoji))
+
+(use-package git-ps1-mode
+  :config
+  ;; Only when __git_ps1 is found by git-ps1-mode-find-ps1-file or site-local/git_ps1_location.el.
+  ;; Site-local/git_ps1_location.el should iclude (setq git-ps1-mode-ps1-file "path/to/git/ps1/function").
+  (when (or (git-ps1-mode-find-ps1-file)
+            (let ((path (expand-file-name "site-local/git-ps1-location.el")))
+              (and (file-exists-p path)
+                   (load-file path))))
+    (add-hook 'dired-mode-hook 'git-ps1-mode)))
+
+(use-package git-modes
+  :defer t
+  :config
+  :hook (gitignore-mode
+         .
+         (lambda ()
+           (setq-local require-final-newline t)
+           (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))))
+
+(use-package haskell-mode
+  :mode
+  (("\\.hs\\'" . haskell-mode)))
+
+(use-package hideshow
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hs-hide-all 100)
+  (add-hook 'python-mode-hook 'hs-minor-mode))
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

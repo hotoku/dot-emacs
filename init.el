@@ -444,6 +444,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
                (local-set-key (kbd "C-c C-f") 'yh/insert-subscript)
                (local-set-key (kbd "C-c C-g") 'yh/insert-superscript))))
 
+(use-package direx)
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

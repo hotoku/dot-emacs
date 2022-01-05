@@ -522,6 +522,30 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 
 (use-package color-moccur)
 
+
+;;; misc
+;; make backup files in a specific directory
+(setq make-backup-files t)
+(add-to-list 'backup-directory-alist
+	     `("\\.*\\'" . ,(expand-file-name "~/backup")))
+
+;; global key
+(progn
+  (global-set-key (kbd "M-u") 'revert-buffer)
+  (global-set-key (kbd "C-M-/") 'comment-region)
+  (global-set-key (kbd "C-M--") 'uncomment-region)
+  (global-set-key [?¥] [?\\])
+  (global-set-key (kbd "C-.") 'yh/other-window-or-split)
+  ;; C-t is used by tmux prefix key.
+  (global-unset-key (kbd "C-t")))
+
+;; tab
+(setq-default tab-width 2
+              indent-tabs-mode nil)
+
+;; truncate lines
+(setq-default truncate-lines t)
+
 (setq dired-listing-switches "-alh")
 
 (custom-set-variables

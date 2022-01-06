@@ -186,7 +186,9 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
   (unless (equal (system-name) "JMB20200036.local")
     ;; todo: この変数にhが入っていると、diredでディレクトリの色がおかしくなるときがある
     ;;       ディレクトリがズラッと並んだディレクトリを表示すると、一行ごとに`default'と`dired-directory'が並んでいるように見える
-    (setq dired-listing-switches "-alh")))
+    ;; memo: dired-kと相性が悪いので、一時的に退避
+    ;; (setq dired-listing-switches "-alh")
+    ))
 
 (use-package savehist
   :init

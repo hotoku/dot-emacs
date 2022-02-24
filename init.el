@@ -580,6 +580,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-error ((t (:underline (:color "#d54e53" :style wave) :weight bold))))
  '(js2-error ((t (:underline nil))))
  '(js2-warning ((t (:underline nil))))
  '(lsp-face-highlight-textual ((t (:inherit highlight :foreground "dark cyan"))))

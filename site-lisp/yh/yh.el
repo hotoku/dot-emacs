@@ -65,8 +65,9 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
 ;;; automatically add x permission to file
 (defun yh/make-executable ()
   "Make file executable if it begins with a shebang."
-  (when (string-equal (buffer-substring 1 3) "#!")
-    (set-file-modes (buffer-file-name) #o755)))
+  (ignore-errors
+    (when (string-equal (buffer-substring 1 3) "#!")
+      (set-file-modes (buffer-file-name) #o755))))
 
 
 ;;; insert script

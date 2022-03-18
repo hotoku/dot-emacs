@@ -169,7 +169,9 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package company
   :config
   (global-company-mode)
-  (setq-default company-idel-delay 0.01))
+  (setq-default company-idel-delay 0.01)
+  (add-to-list 'company-backends 'company-yasnippet)
+  (add-to-list 'company-backends 'company-elisp))
 
 (use-package session)
 

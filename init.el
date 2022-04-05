@@ -164,7 +164,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
 (use-package magit
   :bind (("C-c g" . magit))
   :custom
-  (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits"))
+  (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits")
+  (magit-refresh-verbose t))
 
 (use-package company
   :config

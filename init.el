@@ -54,7 +54,7 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 (setq use-package-always-ensure t) ; automatically install missing packages
 
 
-;;; configuration of packagseo
+;;; configuration of packages
 (unless (featurep 'zetasql-formatter)
   (ignore-errors
     (message "zetasql-formatter is not installed.")
@@ -377,7 +377,8 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
     hcl-mode
     bazel-mode
     js-mode
-    json-mode) .
+    json-mode
+    sh-mode) .
     turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)

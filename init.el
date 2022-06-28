@@ -100,6 +100,10 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package yh-pyenv :ensure nil)
 
+(use-package yh-lsp-python :ensure nil
+  :hook
+  (python-mode . yh-lsp-pyright-setup))
+
 (use-package lsp-mode
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -117,34 +121,7 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   (defvar python-shell-virtualenv-root "")
   (defvar python-shell-interpreter "")
   (defvar python-shell-interpreter-args "")
-  (defvar pyvenv-activate "")
-  (defun yh/lsp-pyright-setup ()
-    "Setup python environment. Inspired from ncaq's init.el.
-https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/init.el#L1321"
-    (cond
-     ;; in poetry project
-     ((locate-dominating-file default-directory "pyproject.toml")
-      (pyenv-mode-auto-hook)
-      (setq-local lsp-pyright-venv-path
-                  (poetry-get-virtualenv))
-      (lsp))
-     ;; with pyenv
-     ((executable-find "pyenv")
-      (setq-local
-       lsp-pyright-venv-path
-       (yh-pyenv-directory))
-      (lsp))
-     (t
-      (lsp))))
-  (defun yh/reset-pyright-poetry ()
-    "Reset lsp setting with poetry."
-    (interactive)
-    (setq-local lsp-pyright-venv-path
-                (poetry-get-virtualenv))
-    (lsp))
-
-  :hook
-  (python-mode . yh/lsp-pyright-setup))
+  (defvar pyvenv-activate ""))
 
 (use-package flycheck
   :config
@@ -587,7 +564,7 @@ https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d0e/i
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" "246cd0eb818bfd347b20fb6365c228fddf24ab7164752afe5e6878cb29b0204e" default))
  '(package-selected-packages
-   '(web-mode company-lsp color-moccur zetasql-formatter helpful terraform-mode json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
+   '(yh-lsp-python web-mode company-lsp color-moccur zetasql-formatter helpful terraform-mode json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

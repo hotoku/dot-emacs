@@ -9,7 +9,7 @@
 
 (defconst yh-blog-posts-dir
   (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("hotoku-macbookair-2019.local" . ,(expand-file-name "~/projects/blog/_posts"))
+               ("hotoku-macbookair-2019.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
                ("JMB20200036.local" . ,(expand-file-name "~/projects/blog/_posts"))
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))

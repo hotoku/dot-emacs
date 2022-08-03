@@ -155,7 +155,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 
 (use-package sql
   :mode
-  (("\\.sql.jinja\\'" . sql-mode))  )
+  (("\\.sql.jinja\\'" . sql-mode)
+   ("\\.ddl\\'" . sql-mode)))
 
 (use-package paren
   :init

@@ -104,6 +104,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   :hook
   (python-mode . yh-lsp-pyright-setup))
 
+(use-package yh-markdown :ensure nil)
+
 (use-package lsp-mode
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -313,7 +315,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
    markdown-xhtml-body-epilogue "</div>")
   (bind-keys :map markdown-mode-map
              ("C-c d" . yh/insert-date)
-             ("C-c t" . yh/insert-time))
+             ("C-c t" . yh/insert-time)
+             ("C-c l" . yh-md-insert-link))
   :hook
   (markdown-mode . (lambda ()
                      (yh-before-save :space :gap)

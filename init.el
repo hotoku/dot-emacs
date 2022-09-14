@@ -497,7 +497,10 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
   (minibuffer-depth-indicate-mode 1)
   (counsel-mode 1))
 
-(use-package terraform-mode)
+(use-package terraform-mode
+  :hook
+  (terraform-mode . (lambda ()
+                      (yh-before-save :space :gap))))
 
 (use-package helpful
   :bind

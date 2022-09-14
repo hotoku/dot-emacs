@@ -9,7 +9,9 @@
 (defun yh-md-insert-link (refnum url)
   "Insert link with reference mark REFNUM and URL."
   (interactive "srefnum: \nsurl: ")
-  (insert (format "[%s]: %s" refnum url)))
+  (save-excursion
+    (goto-char (point-max))
+    (insert (format "[%s]: %s" refnum url))))
 
 (provide 'yh-markdown)
 ;;; yh-markdown.el ends here

@@ -26,6 +26,7 @@
 https://github.com/Matts966/zetasql-formatter."
   (interactive)
   (when yh-sql-do-format
+    (message "yh-sql-do-format=%s" yh-sql-do-format)
     (let* ((curbuf (current-buffer))
            (curpnt (point))
            (outbuf-name "*zetasql*")

@@ -11,6 +11,8 @@
   (interactive "srefnum: \nsurl: ")
   (save-excursion
     (goto-char (point-max))
+    (unless (= (char-before) 10)
+      (insert "\n"))
     (insert (format "[%s]: %s" refnum url))))
 
 (provide 'yh-markdown)

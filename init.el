@@ -573,7 +573,8 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
  '(package-selected-packages
    '(yh-lsp-python web-mode company-lsp color-moccur zetasql-formatter helpful terraform-mode json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package))
  '(safe-local-variable-values
-   '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9"))))
+   '((zsfm-do-format)
+     (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

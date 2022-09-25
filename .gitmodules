@@ -1,0 +1,3 @@
+[submodule "site-lisp/pyenv-mode-auto"]
+	path = site-lisp/pyenv-mode-auto
+	url = git@github.com:hotoku/pyenv-mode-auto

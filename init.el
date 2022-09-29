@@ -114,6 +114,12 @@
   (add-to-list 'company-backends 'company-yasnippet)
   (add-to-list 'company-backends 'company-elisp))
 
+(use-package elisp-mode :ensure nil
+  :hook
+  (elisp-mode . (lambda () (add-hook
+                            'after-save-hook
+                            #'(lambda () (byte-compile-file buffer-file-name)) nil t))))
+
 (use-package session)
 
 (use-package sql
@@ -381,7 +387,7 @@
   ;; :config キーワードはライブラリをロードした後の設定などを記述します。
   :config
   (setq YaTeX-kanji-code nil)
-  (setq YaTeX-latex-message-code 'utf-8)
+  (defvar YaTeX-latex-message-code 'utf-8)
   (setq YaTeX-use-LaTeX2e t)
   (setq YaTeX-use-AMS-LaTeX t)
   (setq tex-command "mytex")
@@ -391,9 +397,9 @@
   (set (make-local-variable 'company-backends) '(company-tabnine))
   ;; keys
   (add-hook 'yatex-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-c C-f") 'yh/insert-subscript)
-               (local-set-key (kbd "C-c C-g") 'yh/insert-superscript))))
+            #'(lambda ()
+                (local-set-key (kbd "C-c C-f") 'yh/insert-subscript)
+                (local-set-key (kbd "C-c C-g") 'yh/insert-superscript))))
 
 (use-package direx)
 
@@ -482,7 +488,15 @@
   :mode
   (("\\.html\\'" . web-mode)))
 
-(use-package tsx-mode)
+(use-package coverlay)
+
+(use-package origami)
+
+(use-package tree-sitter-langs)
+
+(use-package tree-sitter)
+
+(use-package tsx-mode :ensure nil)
 
 
 ;;; misc
@@ -536,7 +550,7 @@
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(tsx-mode afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
+   '(elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

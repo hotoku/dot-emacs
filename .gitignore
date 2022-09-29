@@ -9,3 +9,5 @@ history
 projectile-bookmarks.eld
 recentf
 
+/.cache/
+/.lsp-session-v1

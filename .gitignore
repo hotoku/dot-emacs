@@ -4,3 +4,8 @@ elpa/
 .package-refreshed-date
 *.elc
 transient
+emojis
+history
+projectile-bookmarks.eld
+recentf
+

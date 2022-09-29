@@ -4,12 +4,16 @@
 
 ;;; Code:
 
-
-
 (require 'package)
 (setq package-archives '(("org" . "http://orgmode.org/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "http://melpa.org/packages/")))
+
+(let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+  (normal-top-level-add-subdirs-to-load-path))
+(require 'yh)
+(yh/refresh-package)
+
 
 
 (unless (package-installed-p 'use-package)

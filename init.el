@@ -67,6 +67,25 @@
 
 (use-package f)
 
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((js-mode . lsp)
+   (c++-mode . lsp))
+  :commands
+  (lsp lsp-deferred))
+
+(use-package lsp-ui)
+
+(use-package lsp-pyright
+  :config
+  (defvar python-shell-virtualenv-root "")
+  (defvar python-shell-interpreter "")
+  (defvar python-shell-interpreter-args "")
+  (defvar pyvenv-activate ""))
+
 (use-package poetry)
 
 (use-package pyenv-mode)
@@ -83,7 +102,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
+   '(lsp-pyright lsp-ui lsp-mode gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

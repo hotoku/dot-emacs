@@ -99,6 +99,7 @@
   (conf-toml-mode)
   :hook
   (conf-toml-mode . (lambda ()
+                      (require 'yh-save)
                       (yh-before-save :space :gap :indent))))
 
 (use-package magit
@@ -116,9 +117,11 @@
 
 (use-package elisp-mode :ensure nil
   :hook
-  (elisp-mode . (lambda () (add-hook
-                            'after-save-hook
-                            #'(lambda () (byte-compile-file buffer-file-name)) nil t))))
+  (emacs-lisp-mode
+   .
+   #'(lambda () (add-hook
+                 'after-save-hook
+                 #'(lambda () (byte-compile-file buffer-file-name)) nil t))))
 
 (use-package session)
 
@@ -492,9 +495,15 @@
 
 (use-package origami)
 
+;; .dylibファイルを手で置く必要がある
+;; cf: https://github.com/emacs-tree-sitter/elisp-tree-sitter/issues/88
 (use-package tree-sitter-langs)
 
+;; .tarを展開する必要がある(かも)
+;; cf: https://github.com/emacs-tree-sitter/elisp-tree-sitter/issues/88
 (use-package tree-sitter)
+
+(use-package tsi :ensure nil)
 
 (use-package tsx-mode :ensure nil)
 
@@ -550,7 +559,7 @@
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
+   '(tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

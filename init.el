@@ -17,12 +17,20 @@
 (require 'yh)
 (yh/refresh-package)
 
+(use-package gnu-elpa-keyring-update
+  :config
+  (unless (file-directory-p package-gnupghome-dir)
+    (make-directory package-gnupghome-dir))
+  (gnu-elpa-keyring-update))
 
-;;;
-(let ((orig-value package-check-signature))
-  (setq package-check-signature nil)
-  (package-install 'compat)
-  (setq package-check-signature orig-value))
+
+
+;; ;;; Installing compat failed due to the signature check.
+;; ;;; We disable check temporarily.
+;; (let ((orig-value package-check-signature))
+;;   (setq package-check-signature nil)
+;;   (package-install 'compat)
+;;   (setq package-check-signature orig-value))
 
 
 (unless (package-installed-p 'use-package)
@@ -51,7 +59,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(compat poetry pyenv-mode f s yasnippet use-package)))
+ '(package-selected-packages
+   '(gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

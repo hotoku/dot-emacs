@@ -17,6 +17,12 @@
 (require 'yh)
 (yh/refresh-package)
 
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+
 (use-package gnu-elpa-keyring-update
   :config
   (unless (file-directory-p package-gnupghome-dir)
@@ -25,18 +31,8 @@
 
 
 
-;; ;;; Installing compat failed due to the signature check.
-;; ;;; We disable check temporarily.
-;; (let ((orig-value package-check-signature))
-;;   (setq package-check-signature nil)
-;;   (package-install 'compat)
-;;   (setq package-check-signature orig-value))
 
 
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-(require 'use-package)
-(setq use-package-always-ensure t)
 
 (use-package s)
 

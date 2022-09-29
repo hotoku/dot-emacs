@@ -73,7 +73,8 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook
   ((js-mode . lsp)
-   (c++-mode . lsp))
+   (c++-mode . lsp)
+   (tsx-mode . lsp))
   :commands
   (lsp lsp-deferred))
 
@@ -507,7 +508,9 @@
 
 (use-package graphql-mode)
 
-(use-package tsx-mode :ensure nil)
+(use-package tsx-mode :ensure nil
+  :mode
+  (("\\.tsx?\\'" . tsx-mode)))
 
 
 ;;; misc

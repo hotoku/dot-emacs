@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: nodoc
+# key: nodoc
+# --
+
+;; Local Variables:
+;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
+;; End:

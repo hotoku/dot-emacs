@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: fetch
+# key: fetch
+# --
+(async () => {
+  try {
+  } catch (e) {
+    console.log("error" + e);
+  }
+})()

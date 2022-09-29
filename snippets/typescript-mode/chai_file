@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: chai_file
+# key: chaifile
+# --
+import { expect } from "chai";
+import "mocha";
+
+describe("$1", () => {
+  it("$2", () => {
+    $3
+  })
+})

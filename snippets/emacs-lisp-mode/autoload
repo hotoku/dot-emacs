@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: autload
+# key: autload
+# --
+;;;###autoload

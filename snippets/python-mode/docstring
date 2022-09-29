@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: docstring
+# key: docstring
+# --
+"""
+$1
+
+Parameters
+----------
+$2 : $3
+    $4
+
+Returns
+-------
+$5 : $6
+    $7
+"""

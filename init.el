@@ -1,9 +1,11 @@
 ;;; init.el ---  -*- lexical-binding: t -*-
 
+
 ;;; Commentary:
 
 ;; memo: byte compile all .el files
 ;; (byte-recompile-directory "~/.emacs.d" 0 t)
+
 
 ;;; Code:
 
@@ -22,17 +24,44 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-
 (use-package gnu-elpa-keyring-update
   :config
   (unless (file-directory-p package-gnupghome-dir)
     (make-directory package-gnupghome-dir))
   (gnu-elpa-keyring-update))
 
+(use-package yh :ensure nil)
 
+(use-package yh-blog :ensure nil)
 
+(use-package yh-fef :ensure nil
+  :hook
+  (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
 
+(use-package yh-docker :ensure nil
+  :hook
+  (dockerfile-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
 
+(use-package yh-font :ensure nil
+  :config
+  (yh-font-initialize))
+
+(use-package yh-make :ensure nil)
+
+(use-package yh-sh :ensure nil)
+
+(use-package yh-save :ensure nil)
+
+(use-package yh-pyenv :ensure nil)
+
+(use-package yh-lsp-python :ensure nil
+  :hook
+  (python-mode . yh-lsp-pyright-setup))
+
+(use-package yh-markdown :ensure nil)
 
 (use-package s)
 
@@ -47,8 +76,6 @@
   (setq yas-snippet-dirs
         '("~/.emacs.d/snippets"))
   (yas-global-mode 1))
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

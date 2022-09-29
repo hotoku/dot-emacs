@@ -340,7 +340,9 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
 (use-package py-autopep8
   :hook (python-mode . py-autopep8-enable-on-save))
 
-(use-package pyenv-mode-auto)
+(use-package pyenv-mode)
+
+(use-package pyenv-mode-auto :ensure nil)
 
 (use-package python
   :ensure nil
@@ -571,7 +573,7 @@ The last executing date is recorded in the FILENAME in `user-emacs-directory.'"
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" "246cd0eb818bfd347b20fb6365c228fddf24ab7164752afe5e6878cb29b0204e" default))
  '(package-selected-packages
-   '(yh-lsp-python web-mode company-lsp color-moccur zetasql-formatter helpful terraform-mode json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package))
+   '(pyenv-mode yh-lsp-python web-mode company-lsp color-moccur zetasql-formatter helpful terraform-mode json-par git-modes session ppp spinner gnupg lsp-mode hcl-mode direx dired-k exec-path-from-shell dired yh-make il lsp-docker poetry gitignore-mode helm-ag pyenv afuternoon-theme afternoon-theme bazel-mode pyenv-mode-auto prettier-js dap-python py-autopep8 flymake-yaml dockerfile-mode biblio elpy haskell-mode yaml-mode json-mode gnu-elpa-keyring-update undo-tree git-ps1-mode ace-window flycheck yasnippet open-junk-file dakrone-theme smartparens helm company use-package))
  '(safe-local-variable-values
    '((zsfm-do-format)
      (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9"))))

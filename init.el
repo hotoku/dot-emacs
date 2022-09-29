@@ -2,6 +2,9 @@
 
 ;;; Commentary:
 
+;; memo: byte compile all .el files
+;; (byte-recompile-directory "~/.emacs.d" 0 t)
+
 ;;; Code:
 
 (require 'package)
@@ -15,12 +18,25 @@
 (yh/refresh-package)
 
 
+;;;
+(let ((orig-value package-check-signature))
+  (setq package-check-signature nil)
+  (package-install 'compat)
+  (setq package-check-signature orig-value))
+
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package s)
+
+(use-package f)
+
+(use-package poetry)
+
+(use-package pyenv-mode)
 
 (use-package yasnippet
   :config
@@ -35,7 +51,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(s yasnippet use-package)))
+ '(package-selected-packages '(compat poetry pyenv-mode f s yasnippet use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -3,3 +3,4 @@ old
 elpa/
 .package-refreshed-date
 *.elc
+transient

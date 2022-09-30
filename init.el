@@ -301,7 +301,7 @@
 
 (use-package prettier-js
   :hook
-  (((js-mode css-mode) . prettier-js-mode)))
+  (((js-mode css-mode tsx-mode) . prettier-js-mode)))
 
 (use-package projectile
   :config
@@ -339,7 +339,8 @@
     bazel-mode
     js-mode
     json-mode
-    sh-mode) .
+    sh-mode
+    tsx-mode) .
     turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)

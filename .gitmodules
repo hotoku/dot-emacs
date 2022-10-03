@@ -5,5 +5,5 @@
 	path = site-lisp/tsx-mode.el
 	url = https://github.com/orzechowskid/tsx-mode.el
 [submodule "site-lisp/site-lisp/tsi"]
-	path = site-lisp/site-lisp/tsi
+	path = site-lisp/tsi
 	url = https://github.com/orzechowskid/tsi.el

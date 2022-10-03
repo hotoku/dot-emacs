@@ -11,3 +11,4 @@ recentf
 
 /.cache/
 /.lsp-session-v1
+.dap-breakpoints

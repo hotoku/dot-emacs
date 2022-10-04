@@ -126,6 +126,8 @@
 
 (use-package session)
 
+(use-package zetasql-formatter :ensure nil)
+
 (use-package sql
   :mode
   (("\\.sql.jinja\\'" . sql-mode)

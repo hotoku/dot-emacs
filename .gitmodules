@@ -7,3 +7,6 @@
 [submodule "site-lisp/tsi"]
 	path = site-lisp/tsi
 	url = https://github.com/orzechowskid/tsi.el
+[submodule "site-lisp/tsi.el"]
+	path = site-lisp/tsi.el
+	url = https://github.com/orzechowskid/tsi.el

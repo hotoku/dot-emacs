@@ -254,10 +254,6 @@
   :config
   (setq js-indent-level 2))
 
-(use-package js2-mode
-  :hook
-  ((js-mode . js2-minor-mode)))
-
 (use-package json-mode
   :mode
   (("\\.json\\'" . json-mode)

@@ -213,9 +213,7 @@
 
 (use-package emojify
   :if (display-graphic-p)
-  :hook (after-init . global-emojify-mode)
-  :bind
-  ("C-x e" . 'emojify-insert-emoji))
+  :hook (after-init . global-emojify-mode))
 
 (use-package git-ps1-mode
   :config

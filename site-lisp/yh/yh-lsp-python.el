@@ -10,6 +10,9 @@
 (require 'poetry)
 (require 'yh-pyenv)
 
+(defun yh-lsp-python-get-pyenv-path ()
+  (call-process "ls" nil nil t))
+
 (defun yh-lsp-pyright-setup ()
   "Setup python environment.
 

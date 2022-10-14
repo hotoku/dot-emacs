@@ -24,6 +24,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(unless (package-installed-p 'zetasql-formatter-mode)
+  (package-install-file (expand-file-name
+                         "site-lisp/zetasql-formatter-el/zetasql-formatter.el"
+                         user-emacs-directory)))
+
 (use-package gnu-elpa-keyring-update
   :config
   (unless (file-directory-p package-gnupghome-dir)
@@ -208,9 +213,7 @@
 
 (use-package emojify
   :if (display-graphic-p)
-  :hook (after-init . global-emojify-mode)
-  :bind
-  ("C-x e" . 'emojify-insert-emoji))
+  :hook (after-init . global-emojify-mode))
 
 (use-package git-ps1-mode
   :config
@@ -561,10 +564,11 @@
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
+   '(zetasql-formatter graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
  '(safe-local-variable-values
    '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9")
      (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/uke-parser-FPTIwvj7-py3.10"))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

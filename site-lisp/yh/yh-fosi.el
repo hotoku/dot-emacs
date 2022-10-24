@@ -12,13 +12,15 @@
   (let ((orig-buf (current-buffer))
         (buffer (generate-new-buffer "*fosi*")))
     (start-process "fosi" buffer "fosi" "-f" "-i" (buffer-file-name))
-    (sit-for 0.5)
     (switch-to-buffer buffer)
-    (search-backward "htmlPort")
+    (while (not (search-backward "htmlPort" nil t))
+      (message "not found")
+      (sit-for 0.1))
     (message "%s %s"
              (buffer-substring-no-properties
               (line-beginning-position) (line-end-position))
              (buffer-name))
+    (goto-char (point-max))
     (switch-to-buffer orig-buf)))
 
 (provide 'yh-fosi)

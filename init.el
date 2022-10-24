@@ -37,6 +37,8 @@
 
 (use-package yh :ensure nil)
 
+(use-package yh-fosi :ensure nil)
+
 (use-package yh-blog :ensure nil)
 
 (use-package yh-fef :ensure nil

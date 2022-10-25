@@ -348,7 +348,10 @@
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)
-         ("C-c s" . smartparens-strict-mode)))
+         ("C-c s" . smartparens-strict-mode)
+         :map emacs-lisp-mode-map
+         ("C-M-a" . sp-beginning-of-sexp)
+         ("C-M-e" . sp-end-of-sexp)))
 
 (use-package smartparens-config :ensure nil)
 

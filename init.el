@@ -68,6 +68,8 @@
 
 (use-package yh-markdown :ensure nil)
 
+(use-package yh-fosi :ensure nil)
+
 (use-package s)
 
 (use-package f)
@@ -567,8 +569,7 @@
    '(zetasql-formatter graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
  '(safe-local-variable-values
    '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9")
-     (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/uke-parser-FPTIwvj7-py3.10")
-     (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/works-kf_K8svi-py3.10"))))
+     (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/uke-parser-FPTIwvj7-py3.10"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

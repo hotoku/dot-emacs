@@ -347,7 +347,8 @@
     turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)
-         ("C-M-g" . sp-forward-barf-sexp)))
+         ("C-M-g" . sp-forward-barf-sexp)
+         ("C-c s" . smartparens-strict-mode)))
 
 (use-package smartparens-config :ensure nil)
 

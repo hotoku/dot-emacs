@@ -35,6 +35,9 @@
     (make-directory package-gnupghome-dir))
   (gnu-elpa-keyring-update))
 
+
+;;; yh-sup-begin
+
 (use-package yh :ensure nil)
 
 (use-package yh-fosi :ensure nil)
@@ -519,6 +522,9 @@
 (use-package tsx-mode :ensure nil
   :mode
   (("\\.tsx?\\'" . tsx-mode)))
+
+
+;;; yh-sup-end
 
 
 ;;; misc

@@ -2,4 +2,5 @@
 # name: debug
 # key: debug
 # --
-breakpoint()
+import IPython
+IPython.embed()

@@ -35,6 +35,9 @@
     (make-directory package-gnupghome-dir))
   (gnu-elpa-keyring-update))
 
+
+;;; yh-sup-begin
+
 (use-package yh :ensure nil)
 
 (use-package yh-fosi :ensure nil)
@@ -69,6 +72,8 @@
   (python-mode . yh-lsp-pyright-setup))
 
 (use-package yh-markdown :ensure nil)
+
+(use-package yh-fosi :ensure nil)
 
 (use-package s)
 
@@ -345,7 +350,11 @@
     turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)
-         ("C-M-g" . sp-forward-barf-sexp)))
+         ("C-M-g" . sp-forward-barf-sexp)
+         ("C-c s" . smartparens-strict-mode)
+         :map emacs-lisp-mode-map
+         ("M-s-a" . sp-beginning-of-sexp)
+         ("M-s-e" . sp-end-of-sexp)))
 
 (use-package smartparens-config :ensure nil)
 
@@ -513,6 +522,9 @@
 (use-package tsx-mode :ensure nil
   :mode
   (("\\.tsx?\\'" . tsx-mode)))
+
+
+;;; yh-sup-end
 
 
 ;;; misc

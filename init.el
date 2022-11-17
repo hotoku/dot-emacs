@@ -293,6 +293,7 @@
   (bind-keys :map markdown-mode-map
              ("C-c d" . yh/insert-date)
              ("C-c t" . yh/insert-time)
+             ("C-c u" . yh/insert-time2)
              ("C-c l" . yh-md-insert-link))
   :hook
   (markdown-mode . (lambda ()

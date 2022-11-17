@@ -53,6 +53,11 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
   (interactive)
   (insert (format-time-string "[%Y-%m-%d %H:%M:%S]" (current-time))))
 
+(defun yh/insert-time2 ()
+  "Inisert time."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%dT%H:%M:%S" (current-time))))
+
 
 ;;; hideshow
 (defun yh/ret-hs ()
@@ -87,10 +92,11 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
   (interactive "sscript: ")
   (yh/insert-script "^" script))
 
+
 ;;; refresh package only once in a day
 (defun yh/refresh-package ()
   (let* ((filename ".package-refreshed-date")
-	 (path (expand-file-name filename user-emacs-directory))
+	       (path (expand-file-name filename user-emacs-directory))
          (today (format-time-string "%Y-%m-%d"))
          (last-date (when (file-exists-p path)
                       (with-temp-buffer
@@ -98,13 +104,13 @@ the next ARG files are used.  Just \\[universal-argument] means the current file
                         (buffer-substring 1 11))))
          (should-update (or (not last-date)
                             (string< last-date today))))
-    
+
     (when should-update
       (let ((orig-value package-check-signature))
-	(setq package-check-signature nil)
-	(package-refresh-contents)
-	(package-install 'gnu-elpa-keyring-update)
-	(setq package-check-signature orig-value))
+	      (setq package-check-signature nil)
+	      (package-refresh-contents)
+	      (package-install 'gnu-elpa-keyring-update)
+	      (setq package-check-signature orig-value))
       (with-temp-buffer
         (insert today)
         (write-region (point-min) (point-max) path)))))

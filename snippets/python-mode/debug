@@ -2,5 +2,5 @@
 # name: debug
 # key: debug
 # --
-import IPython
-IPython.embed()
+import pdb
+pdb.set_trace()

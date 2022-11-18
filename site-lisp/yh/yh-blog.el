@@ -14,8 +14,8 @@
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))
 
-(defconst yh-blog-inctore-post-dir
-  (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
+(defconst yh-blog-inctore-posts-dir
+  (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
     (cdr (assoc (system-name) dic))))
 
 (defun yh-blog-publish ()
@@ -35,14 +35,12 @@
 
 (defun yh-blog-new-impl (dir title url)
   "Open new blog post of TITLE and URL in DIR."
-  (when (not dir) (error "The value of dir is nil.
-It can be registered in the file yh-blog.el"))
   (let* ((y (format-time-string "%Y"))
          (m (format-time-string "%m"))
          (d (format-time-string "%d"))
          (url2 (replace-regexp-in-string " " "-" url))
          (fn (format "%s-%s-%s-%s.md" y m d url2)))
-    (find-file (expand-file-name fn yh-blog-posts-dir))
+    (find-file (expand-file-name fn dir))
     (insert (format "---
 layout: post
 title: %s
@@ -54,6 +52,17 @@ tags:
     (goto-char (point-min))
     (search-forward "tags:")
     (insert " ")))
+
+(defun yh-blog-new (prefix title url)
+  "Open new blog post of TITLE and URL.
+If PREFIX is given, posts are created in inctore's blog."
+  (interactive "P\nsblog title: \nsurl: ")
+  (let* ((dir (if prefix yh-blog-inctore-posts-dir yh-blog-posts-dir))
+         (url2 (replace-regexp-in-string " " "-" url)))
+    (message "prefix=%s" prefix)
+    (when (not yh-blog-posts-dir) (error "The value of yh-blog-posts-dir is nil.
+It can be registered in the file yh-blog.el"))
+    (yh-blog-new-impl dir title url2)))
 
 (defun yh-blog-to-other (dir-nm)
   "Move current post to directory DIR-NM."

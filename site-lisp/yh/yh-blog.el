@@ -14,6 +14,10 @@
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))
 
+(defconst yh-blog-inctore-post-dir
+  (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
+    (cdr (assoc (system-name) dic))))
+
 (defun yh-blog-publish ()
   "Commit change and push to remote."
   (interactive)
@@ -29,10 +33,9 @@
         (message "pushed")
       (message "push failed"))))
 
-(defun yh-blog-new (title url)
-  "Open new blog post of TITLE and URL."
-  (interactive "sblog title: \nsurl: ")
-  (when (not yh-blog-posts-dir) (error "The value of yh-blog-posts-dir is nil.
+(defun yh-blog-new-impl (dir title url)
+  "Open new blog post of TITLE and URL in DIR."
+  (when (not dir) (error "The value of dir is nil.
 It can be registered in the file yh-blog.el"))
   (let* ((y (format-time-string "%Y"))
          (m (format-time-string "%m"))
@@ -44,6 +47,7 @@ It can be registered in the file yh-blog.el"))
 layout: post
 title: %s
 date: %s-%s-%s %s +0900
+categories: blog
 tags:
 ---
 " title y m d (format-time-string "%H:%M:%S")))

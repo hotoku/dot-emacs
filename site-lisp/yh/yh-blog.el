@@ -14,33 +14,33 @@
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))
 
-(defun yh-blog-header (title y m d)
+(defun yh-blog-header (title)
   "Header generation function for hotoku blog.
-TITLE: article's title, Y, M, D are date values."
+TITLE: article's title."
   (format "---
 layout: post
 title: %s
-date: %s-%s-%s %s +0900
+date: %s +0900
 categories: blog
 tags:
 ---
-" title y m d (format-time-string "%H:%M:%S")))
+" title (format-time-string "%Y-%m-%d %H:%M:%S")))
 
 (defconst yh-blog-inctore-posts-dir
   (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
     (cdr (assoc (system-name) dic))))
 
-(defun yh-blog-inctore-header (title y m d)
+(defun yh-blog-inctore-header (title)
   "Header generation function for inctore blog.
 TITLE: article's title, Y, M, D are date values."
   (format "---
 title: %s
-last_modified_at: %s-%s-%sT%s
+last_modified_at: %s
 categories:
   - blog
 tags:
 ---
-" title y m d (format-time-string "%H:%M:%S")))
+" title (format-time-string "%Y-%m-%dT%H:%M:%S")))
 
 (defun yh-blog-publish ()
   "Commit change and push to remote."
@@ -59,13 +59,10 @@ tags:
 
 (defun yh-blog-new-impl (dir title url header-fn)
   "Open new blog post of TITLE and URL in DIR."
-  (let* ((y (format-time-string "%Y"))
-         (m (format-time-string "%m"))
-         (d (format-time-string "%d"))
-         (url2 (replace-regexp-in-string " " "-" url))
-         (fn (format "%s-%s-%s-%s.md" y m d url2)))
+  (let* ((url2 (replace-regexp-in-string " " "-" url))
+         (fn (format "%s-%s.md" (format-time-string "%Y-%m-%d") url2)))
     (find-file (expand-file-name fn dir))
-    (insert (apply header-fn (list title y m d)))
+    (insert (apply header-fn (list title)))
     (goto-char (point-min))
     (search-forward "tags:")
     (insert " ")))

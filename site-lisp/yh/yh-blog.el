@@ -14,9 +14,33 @@
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))
 
+(defun yh-blog-header (title y m d)
+  "Header generation function for hotoku blog.
+TITLE: article's title, Y, M, D are date values."
+  (format "---
+layout: post
+title: %s
+date: %s-%s-%s %s +0900
+categories: blog
+tags:
+---
+" title y m d (format-time-string "%H:%M:%S")))
+
 (defconst yh-blog-inctore-posts-dir
   (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
     (cdr (assoc (system-name) dic))))
+
+(defun yh-blog-inctore-header (title y m d)
+  "Header generation function for inctore blog.
+TITLE: article's title, Y, M, D are date values."
+  (format "---
+title: %s
+last_modified_at: %s-%s-%sT%s
+categories:
+  - blog
+tags:
+---
+" title y m d (format-time-string "%H:%M:%S")))
 
 (defun yh-blog-publish ()
   "Commit change and push to remote."
@@ -33,7 +57,7 @@
         (message "pushed")
       (message "push failed"))))
 
-(defun yh-blog-new-impl (dir title url)
+(defun yh-blog-new-impl (dir title url header-fn)
   "Open new blog post of TITLE and URL in DIR."
   (let* ((y (format-time-string "%Y"))
          (m (format-time-string "%m"))
@@ -41,14 +65,7 @@
          (url2 (replace-regexp-in-string " " "-" url))
          (fn (format "%s-%s-%s-%s.md" y m d url2)))
     (find-file (expand-file-name fn dir))
-    (insert (format "---
-layout: post
-title: %s
-date: %s-%s-%s %s +0900
-categories: blog
-tags:
----
-" title y m d (format-time-string "%H:%M:%S")))
+    (insert (apply header-fn (list title y m d)))
     (goto-char (point-min))
     (search-forward "tags:")
     (insert " ")))
@@ -58,11 +75,12 @@ tags:
 If PREFIX is given, posts are created in inctore's blog."
   (interactive "P\nsblog title: \nsurl: ")
   (let* ((dir (if prefix yh-blog-inctore-posts-dir yh-blog-posts-dir))
-         (url2 (replace-regexp-in-string " " "-" url)))
+         (url2 (replace-regexp-in-string " " "-" url))
+         (header-fn (if prefix 'yh-blog-inctore-header 'yh-blog-header)))
     (message "prefix=%s" prefix)
     (when (not yh-blog-posts-dir) (error "The value of yh-blog-posts-dir is nil.
 It can be registered in the file yh-blog.el"))
-    (yh-blog-new-impl dir title url2)))
+    (yh-blog-new-impl dir title url2 header-fn)))
 
 (defun yh-blog-to-other (dir-nm)
   "Move current post to directory DIR-NM."

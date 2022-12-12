@@ -316,7 +316,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package py-autopep8
-  :hook (python-mode . py-autopep8-enable-on-save))
+  :hook (python-mode . py-autopep8-mode))
 
 (use-package pyenv-mode)
 

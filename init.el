@@ -26,7 +26,7 @@
 
 (unless (package-installed-p 'zetasql-formatter-mode)
   (package-install-file (expand-file-name
-                         "site-lisp/zetasql-formatter-el/zetasql-formatter.el"
+                         "site-lisp/submodules/zetasql-formatter-el/zetasql-formatter.el"
                          user-emacs-directory)))
 
 (use-package gnu-elpa-keyring-update

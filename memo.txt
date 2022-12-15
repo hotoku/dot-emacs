@@ -1,0 +1,15 @@
+[submodule "site-lisp/pyenv-mode-auto"]
+	path = site-lisp/pyenv-mode-auto
+	url = git@github.com:hotoku/pyenv-mode-auto
+[submodule "site-lisp/tsx-mode.el"]
+	path = site-lisp/tsx-mode.el
+	url = https://github.com/orzechowskid/tsx-mode.el
+[submodule "site-lisp/tsi"]
+	path = site-lisp/tsi
+	url = https://github.com/orzechowskid/tsi.el
+[submodule "site-lisp/tsi.el"]
+	path = site-lisp/tsi.el
+	url = https://github.com/orzechowskid/tsi.el
+[submodule "site-lisp/zetasql-formatter-el"]
+	path = site-lisp/zetasql-formatter-el
+	url = git@github.com:hotoku/zetasql-formatter-el

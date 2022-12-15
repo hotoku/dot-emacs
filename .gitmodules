@@ -13,3 +13,6 @@
 [submodule "site-lisp/zetasql-formatter-el"]
 	path = site-lisp/zetasql-formatter-el
 	url = git@github.com:hotoku/zetasql-formatter-el
+[submodule "site-lisp/submodules/pyenv-mode-auto"]
+	path = site-lisp/submodules/pyenv-mode-auto
+	url = git@github.com:hotoku/pyenv-mode-auto

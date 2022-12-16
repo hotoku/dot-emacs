@@ -91,7 +91,8 @@
   :hook
   ((js-mode . lsp)
    (c++-mode . lsp)
-   (tsx-mode . lsp))
+   (tsx-mode . lsp)
+   (lsp-mode . lsp-enable-which-key-integration))
   :commands
   (lsp lsp-deferred))
 

@@ -35,11 +35,6 @@
     (make-directory package-gnupghome-dir))
   (gnu-elpa-keyring-update))
 
-(use-package nginx-mode
-  :hook
-  (conf-mode . (lambda () (when (string-match "nginx" (buffer-file-name))
-                            (nginx-mode)))))
-
 
 ;;; yh-sup-begin
 
@@ -529,6 +524,14 @@
 (use-package tsx-mode :ensure nil
   :mode
   (("\\.tsx?\\'" . tsx-mode)))
+
+(use-package nginx-mode
+  :hook
+  (conf-mode . (lambda ()
+                 (when (string-match "nginx" (buffer-file-name))
+                   (nginx-mode))))
+  (conf-toml-mode . (lambda ()
+                      (yh-before-save :space :gap :indent))))
 
 
 ;;; yh-sup-end

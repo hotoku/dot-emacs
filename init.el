@@ -530,8 +530,8 @@
   (conf-mode . (lambda ()
                  (when (string-match "nginx" (buffer-file-name))
                    (nginx-mode))))
-  (conf-toml-mode . (lambda ()
-                      (yh-before-save :space :gap :indent))))
+  (nginx-mode . (lambda ()
+                  (yh-before-save :space :gap :indent))))
 
 
 ;;; yh-sup-end

@@ -523,7 +523,12 @@
 
 (use-package tsx-mode :ensure nil
   :mode
-  (("\\.tsx?\\'" . tsx-mode)))
+  (("\\.tsx?\\'" . tsx-mode))
+  :hook
+  (tsx-mode . (lambda ()
+                (setq-local
+                 open-paren-in-column-0-is-defun-start nil
+                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*"))))
 
 (use-package nginx-mode
   :hook

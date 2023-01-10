@@ -40,7 +40,9 @@
 
 (use-package yh :ensure nil)
 
-(use-package yh-todo :ensure nil)
+(use-package yh-todo :ensure nil
+  :commands
+  (yh-todo-open))
 
 (use-package yh-fosi :ensure nil)
 

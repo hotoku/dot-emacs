@@ -539,7 +539,7 @@
   (nginx-mode . (lambda ()
                   (yh-before-save :space :gap :indent))))
 
-(use-package org :ensure nil
+(use-package org
   :bind
   (("C-c l" . 'org-store-link)
    ("C-c a" . 'org-agenda)

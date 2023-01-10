@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
-# name: autload
-# key: autload
+# name: autoload
+# key: autoload
 # --
 ;;;###autoload
+(defun $0)

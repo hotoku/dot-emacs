@@ -547,7 +547,10 @@
   :config
   (setq org-adapt-indentation t
         org-hide-leading-stars t
-        org-odd-levels-only t))
+        org-odd-levels-only t)
+  :hook
+  (org-mode . (lambda ()
+                (yh-before-save :space :gap))))
 
 
 ;;; yh-sup-end

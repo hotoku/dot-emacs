@@ -40,6 +40,8 @@
 
 (use-package yh :ensure nil)
 
+(use-package yh-todo :ensure nil)
+
 (use-package yh-fosi :ensure nil)
 
 (use-package yh-blog :ensure nil)

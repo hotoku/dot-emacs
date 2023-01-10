@@ -528,7 +528,8 @@
   (tsx-mode . (lambda ()
                 (setq-local
                  open-paren-in-column-0-is-defun-start nil
-                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*"))))
+                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*")
+                (emojify-mode -1))))
 
 (use-package nginx-mode
   :hook
@@ -537,6 +538,16 @@
                    (nginx-mode))))
   (nginx-mode . (lambda ()
                   (yh-before-save :space :gap :indent))))
+
+(use-package org :ensure nil
+  :bind
+  (("C-c l" . 'org-store-link)
+   ("C-c a" . 'org-agenda)
+   ("C-c c" . 'org-capture))
+  :config
+  (setq org-adapt-indentation t
+        org-hide-leading-stars t
+        org-odd-levels-only t))
 
 
 ;;; yh-sup-end
@@ -596,7 +607,8 @@
  '(package-selected-packages
    '(nginx-mode zetasql-formatter graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
  '(safe-local-variable-values
-   '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9")
+   '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/dor-ds-model--wcqDDvK-py3.9")
+     (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9")
      (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/uke-parser-FPTIwvj7-py3.10")
      (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/works-kf_K8svi-py3.10"))))
 

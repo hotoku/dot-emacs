@@ -42,7 +42,9 @@
 
 (use-package yh-todo :ensure nil
   :commands
-  (yh-todo-open))
+  (yh-todo-open)
+  :bind
+  (("C-c t" . yh-todo-open)))
 
 (use-package yh-fosi :ensure nil)
 
@@ -544,6 +546,8 @@
                   (yh-before-save :space :gap :indent))))
 
 (use-package org
+  :commands
+  (org-store-link)
   :bind
   (("C-c l" . 'org-store-link)
    ("C-c a" . 'org-agenda)

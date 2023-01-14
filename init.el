@@ -548,14 +548,13 @@
 (use-package org
   :commands
   (org-store-link)
-  :bind
-  (("C-c l" . 'org-store-link)
-   ("C-c a" . 'org-agenda)
-   ("C-c c" . 'org-capture))
   :config
   (setq org-adapt-indentation t
         org-hide-leading-stars t
         org-odd-levels-only t)
+  (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+  (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+  (define-key org-mode-map (kbd "C-c c") 'org-capture)
   :hook
   (org-mode . (lambda ()
                 (yh-before-save :space :gap))))
@@ -616,7 +615,7 @@
  '(custom-safe-themes
    '("57e3f215bef8784157991c4957965aa31bac935aca011b29d7d8e113a652b693" default))
  '(package-selected-packages
-   '(nginx-mode zetasql-formatter graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
+   '(org-preview-html nginx-mode zetasql-formatter graphql-mode tsi tsi-typescript elisp-mode elis-mode tree-sitter-langs tree-sitter origami coverlay afternoon-theme conf-mode yatex yaml-mode which-key undo-tree stan-snippets smartparens py-autopep8 projectile prettier-js open-junk-file json-mode js2-mode highlight-indentation haskell-mode git-modes git-ps1-mode emojify flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck gnu-elpa-keyring-update poetry pyenv-mode f s yasnippet use-package))
  '(safe-local-variable-values
    '((lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/dor-ds-model--wcqDDvK-py3.9")
      (lsp-pyright-venv-path . "/Users/hotoku/Library/Caches/pypoetry/virtualenvs/streaming-server-LfQdTTwB-py3.9")

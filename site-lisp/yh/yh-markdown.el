@@ -21,5 +21,10 @@
       (insert "\n"))
     (insert (format "[%s]: %s\n" refnum url))))
 
+(defun yh-md-insert-br ()
+  "Insert br tagl."
+  (interactive)
+  (insert "<br>"))
+
 (provide 'yh-markdown)
 ;;; yh-markdown.el ends here

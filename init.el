@@ -77,7 +77,13 @@
   :hook
   (python-mode . yh-lsp-pyright-setup))
 
-(use-package yh-markdown :ensure nil)
+(use-package yh-markdown :ensure nil
+  :commands
+  (yh-md-insert-br)
+
+  :hook
+  (markdown-mode . (lambda ()
+                     (local-set-key (kbd "C-c n") #'yh-md-insert-br))))
 
 (use-package yh-fosi :ensure nil)
 

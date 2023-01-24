@@ -79,11 +79,15 @@
 
 (use-package yh-markdown :ensure nil
   :commands
-  (yh-md-insert-br)
+  (yh-md-insert-br
+   yh-md-insert-link
+   yh-md-insert-tag)
 
   :hook
   (markdown-mode . (lambda ()
-                     (local-set-key (kbd "C-c n") #'yh-md-insert-br))))
+                     (local-set-key (kbd "C-c n") #'yh-md-insert-br)
+                     (local-set-key (kbd "C-c l") #'yh-md-insert-link)
+                     (local-set-key (kbd "C-c @") #'yh-md-insert-tag))))
 
 (use-package yh-fosi :ensure nil)
 
@@ -306,8 +310,7 @@
   (bind-keys :map markdown-mode-map
              ("C-c d" . yh/insert-date)
              ("C-c t" . yh/insert-time)
-             ("C-c u" . yh/insert-time2)
-             ("C-c l" . yh-md-insert-link))
+             ("C-c u" . yh/insert-time2))
   :hook
   (markdown-mode . (lambda ()
                      (yh-before-save :space :gap)

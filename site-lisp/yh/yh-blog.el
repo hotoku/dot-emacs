@@ -12,7 +12,7 @@
                ("hotoku-macbookair-2019.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
                ("JMB20200036.local" . ,(expand-file-name "~/projects/blog/_posts"))
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("hotoku-macbook-air-2022.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
+               ("hotoku-macbook-air-2022.lan" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (system-name) dic))))
 
 (defun yh-blog-header (title)

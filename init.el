@@ -453,7 +453,8 @@
   :hook
   ((makefile-bsdmake-mode makefile-gmake-mode) .
    (lambda ()
-     (yh-before-save :space :gap))))
+     (yh-before-save :space :gap)
+     (smartparens-strict-mode))))
 
 (use-package sh-script
   :mode

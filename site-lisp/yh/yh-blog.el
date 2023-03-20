@@ -8,12 +8,12 @@
 (require 'dash)
 
 (defconst yh-blog-posts-dir
-  (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("hotoku-macbookair-2019.local" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("JMB20200036.local" . ,(expand-file-name "~/projects/blog/_posts"))
+  (let ((dic `(("hotoku-macmini-2020" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("hotoku-macbook-air-2022.lan" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
-    (cdr (assoc (system-name) dic))))
+               ("JMB20200036" . ,(expand-file-name "~/projects/blog/_posts"))
+               ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
+               ("hotoku-macbook-air-2022" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
+    (cdr (assoc (car (split-string (system-name) "\\.")) dic))))
 
 (defun yh-blog-header (title)
   "Header generation function for hotoku blog.
@@ -28,8 +28,8 @@ tags:
 " title (format-time-string "%Y-%m-%d %H:%M:%S")))
 
 (defconst yh-blog-inctore-posts-dir
-  (let ((dic `(("hotoku-macmini-2020.local" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
-    (cdr (assoc (system-name) dic))))
+  (let ((dic `(("hotoku-macmini-2020" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
+    (cdr (assoc (car (split-string (system-name) "\\.")) dic))))
 
 (defun yh-blog-inctore-header (title)
   "Header generation function for inctore blog.

@@ -99,6 +99,8 @@
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-file-watch-ignored-directories (cons "[/\\\\]\\.scrapy\\'" lsp-file-watch-ignored-directories))
   :hook
   ((js-mode . lsp)
    (c++-mode . lsp)

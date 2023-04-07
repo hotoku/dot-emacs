@@ -28,7 +28,8 @@ tags:
 " title (format-time-string "%Y-%m-%d %H:%M:%S")))
 
 (defconst yh-blog-inctore-posts-dir
-  (let ((dic `(("hotoku-macmini-2020" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
+  (let ((dic `(("hotoku-macmini-2020" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts"))
+               ("hotoku-macbook-air-2022" . ,(expand-file-name "~/projects/inctore/inctore.github.io/_posts")))))
     (cdr (assoc (car (split-string (system-name) "\\.")) dic))))
 
 (defun yh-blog-inctore-header (title)

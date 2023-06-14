@@ -571,6 +571,10 @@
   (org-mode . (lambda ()
                 (yh-before-save :space :gap))))
 
+(use-package ispell
+  :config
+  (define-key text-mode-map (kbd "M-TAB") nil))
+
 
 ;;; yh-sup-end
 
@@ -590,7 +594,8 @@
   (global-set-key (kbd "C-.") 'yh/other-window-or-split)
   ;; C-t is used by tmux prefix key.
   (global-unset-key (kbd "C-t"))
-  (global-unset-key (kbd "s-t")))
+  (global-unset-key (kbd "s-t"))
+  )
 
 ;; tab
 (setq-default tab-width 2

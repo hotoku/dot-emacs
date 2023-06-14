@@ -36,6 +36,13 @@
   (gnu-elpa-keyring-update))
 
 
+;;; image-typesにsvg, gifが入っておらずtreemacsのrequireに失敗するのでworkaround
+;;; todo: linuxのときだけで良い気がする
+;;; todo: 29に上がったら外しても大丈夫か確認する
+(add-to-list 'image-types 'svg)
+(add-to-list 'image-types 'gif)
+
+
 ;;; yh-sup-begin
 
 (use-package yh :ensure nil)

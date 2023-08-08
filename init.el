@@ -31,7 +31,6 @@
   (gnu-elpa-keyring-update))
 
 
-
 ;;; image-typesにsvg, gifが入っておらずtreemacsのrequireに失敗するのでworkaround
 ;;; todo: linuxのときだけで良い気がする
 ;;; todo: 29に上がったら外しても大丈夫か確認する
@@ -91,14 +90,54 @@
 
 (use-package yh-fosi :ensure nil)
 
+(use-package s)
 
+(use-package f)
+
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-file-watch-ignored-directories (cons "[/\\\\]\\.scrapy\\'" lsp-file-watch-ignored-directories))
+  :hook
+  ((js-mode . lsp)
+   (c++-mode . lsp)
+   (tsx-mode . lsp)
+   (lsp-mode . lsp-enable-which-key-integration))
+  :commands
+  (lsp lsp-deferred))
+
+(use-package lsp-ui)
+
+(use-package lsp-pyright
+  :config
+  (defvar python-shell-virtualenv-root "")
+  (defvar python-shell-interpreter "")
+  (defvar python-shell-interpreter-args "")
+  (defvar pyvenv-activate ""))
+
+(use-package flycheck
+  :config
+  (setq
+   flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+   flycheck-idle-change-delay 1
+   flycheck-emacs-lisp-load-path 'inherit)
+  (add-hook 'after-init-hook 'global-flycheck-mode))
+
+(use-package conf-mode
+  :commands
+  (conf-toml-mode)
+  :hook
+  (conf-toml-mode . (lambda ()
+                      (require 'yh-save)
+                      (yh-before-save :space :gap :indent))))
 
 (use-package magit
   :bind (("C-c g" . magit))
   :custom
   (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits")
   (magit-refresh-verbose t))
-
 
 
 ;;; misc
@@ -148,7 +187,6 @@
   :config
   (load-theme 'afternoon))
 
-
 (provide 'init)
 ;;; init.el ends here
 (custom-set-variables
@@ -159,7 +197,7 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
+   '(flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

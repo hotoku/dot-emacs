@@ -165,6 +165,45 @@
   :init
   (show-paren-mode))
 
+(use-package dired
+  :ensure nil
+  :bind
+  ("C-x C-j" . yh/dired)
+  :config
+  (bind-key "z" 'yh/dired-do-open dired-mode-map)
+  (setq dired-listing-switches "-alh"))
+
+(use-package savehist
+  :init
+  (savehist-mode)
+  :custom
+  (savehist-additional-variables '(kill-ring)))
+
+(use-package ace-window
+  :bind (("C-x o" . ace-window)))
+
+(use-package bazel)
+
+(use-package biblio)
+
+(use-package cc-mode
+  :config
+  (add-hook 'c-mode-common-hook
+            #'(lambda ()
+                (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)
+                (add-hook 'before-save-hook #'(lambda () (indent-region (point-min) (point-max))) nil t))))
+
+(use-package company-stan
+  :hook (stan-mode . company-stan-setup)
+  :config
+  (setq company-stan-fuzzy nil))
+
+(use-package dap-mode)
+
+(use-package dap-python :ensure nil)
+
+(use-package dired-x :ensure nil)
+
 
 ;;; misc
 ;; make backup files in a specific directory
@@ -223,7 +262,7 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(company flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
+   '(ace-window company flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

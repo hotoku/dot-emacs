@@ -25,7 +25,7 @@
 (setq use-package-always-ensure t)
 
 (use-package gnu-elpa-keyring-update
-  :config
+  :init
   (unless (file-directory-p package-gnupghome-dir)
     (make-directory package-gnupghome-dir))
   (gnu-elpa-keyring-update))
@@ -37,6 +37,67 @@
 ;;; todo: 29に上がったら外しても大丈夫か確認する
 (add-to-list 'image-types 'svg)
 (add-to-list 'image-types 'gif)
+
+(use-package yh :ensure nil)
+
+(use-package yh-todo :ensure nil
+  :commands
+  (yh-todo-open)
+  :bind
+  (("C-c t" . yh-todo-open)))
+
+(use-package yh-fosi :ensure nil)
+
+(use-package yh-blog :ensure nil)
+
+(use-package yh-fef :ensure nil
+  :hook
+  (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'yh-fef-format-buffer nil t))))
+
+(use-package yh-docker :ensure nil
+  :hook
+  (dockerfile-mode
+   .
+   (lambda ()
+     (add-hook 'before-save-hook 'yh-docker-upcase-command nil t))))
+
+(use-package yh-font :ensure nil
+  :config
+  (yh-font-initialize))
+
+(use-package yh-make :ensure nil)
+
+(use-package yh-sh :ensure nil)
+
+(use-package yh-save :ensure nil)
+
+(use-package yh-pyenv :ensure nil)
+
+(use-package yh-lsp-python :ensure nil
+  :hook
+  (python-mode . yh-lsp-pyright-setup))
+
+(use-package yh-markdown :ensure nil
+  :commands
+  (yh-md-insert-br
+   yh-md-insert-link
+   yh-md-insert-tag)
+
+  :hook
+  (markdown-mode . (lambda ()
+                     (local-set-key (kbd "C-c n") #'yh-md-insert-br)
+                     (local-set-key (kbd "C-c l") #'yh-md-insert-link)
+                     (local-set-key (kbd "C-c @") #'yh-md-insert-tag))))
+
+(use-package yh-fosi :ensure nil)
+
+
+
+(use-package magit
+  :bind (("C-c g" . magit))
+  :custom
+  (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits")
+  (magit-refresh-verbose t))
 
 
 

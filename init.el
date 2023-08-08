@@ -139,6 +139,32 @@
   (magit-log-margin '(t "%Y-%m-%d %H:%M:%S" magit-log-margin-width t 18) "show time of the commits")
   (magit-refresh-verbose t))
 
+(use-package company
+  :config
+  (global-company-mode)
+  (setq-default company-idel-delay 0.01)
+  (add-to-list 'company-backends 'company-yasnippet)
+  (add-to-list 'company-backends 'company-elisp))
+
+(use-package elisp-mode :ensure nil
+  :hook
+  (emacs-lisp-mode
+   .
+   (lambda () (add-hook
+               'after-save-hook
+               #'(lambda () (byte-compile-file buffer-file-name)) nil t))))
+
+(use-package session)
+
+(use-package sql
+  :mode
+  (("\\.sql.jinja\\'" . sql-mode)
+   ("\\.ddl\\'" . sql-mode)))
+
+(use-package paren
+  :init
+  (show-paren-mode))
+
 
 ;;; misc
 ;; make backup files in a specific directory
@@ -197,7 +223,7 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
+   '(company flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

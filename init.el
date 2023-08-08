@@ -47,7 +47,9 @@
 
 (use-package yh-fosi :ensure nil)
 
-(use-package yh-blog :ensure nil)
+;; emacs29になりdashが使えなくなったので、いったんコメントアウトしておく。
+;; todo: dashへの依存をなくす。
+;; (use-package yh-blog :ensure nil)
 
 (use-package yh-fef :ensure nil
   :hook
@@ -233,41 +235,315 @@
                #'(lambda ()
                    (save-excursion
                      (hs-hide-all)
-                     (hs-show-block))) nil t)
-     (emojify-mode -1))))
-
-(use-package emojify
-  :if (display-graphic-p)
-  :hook (after-init . global-emojify-mode))
-
-(use-package git-ps1-mode
-  :config
-  ;; Only when __git_ps1 is found by git-ps1-mode-find-ps1-file or site-local/git_ps1_location.el.
-  ;; Site-local/git_ps1_location.el should iclude (setq git-ps1-mode-ps1-file "path/to/git/ps1/function").
-  (when (or (git-ps1-mode-find-ps1-file)
-            (let ((path (expand-file-name "site-local/git-ps1-location.el")))
-              (and (file-exists-p path)
-                   (load-file path))))
-    (add-hook 'dired-mode-hook 'git-ps1-mode)))
-
-(use-package git-modes
-  :defer t
-  :config
-  :hook (gitignore-mode
-         .
-         (lambda ()
-           (setq-local require-final-newline t)
-           (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))))
-
-(use-package haskell-mode
-  :mode
-  (("\\.hs\\'" . haskell-mode)))
+                     (hs-show-block)))
+               nil t))))
 
 (use-package hideshow
   :init
   (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
   (add-hook 'emacs-lisp-mode-hook 'hs-hide-all 100)
   (add-hook 'python-mode-hook 'hs-minor-mode))
+
+(use-package highlight-indentation
+  :hook ((yaml-mode . highlight-indentation-mode)
+         (yaml-mode . highlight-indentation-current-column-mode))
+  :config
+  (set-face-background 'highlight-indentation-face "gray36")
+  (set-face-background 'highlight-indentation-current-column-face "SteelBlue3"))
+
+(use-package js
+  :init
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . javascript-mode))
+  :config
+  (setq js-indent-level 2))
+
+(use-package json-mode
+  :mode
+  (("\\.json\\'" . json-mode)
+   ("\\.geojson\\'" . json-mode))
+
+  :hook
+  (json-mode . (lambda ()
+                 (yh-before-save :space :gap :indent))))
+
+(use-package markdown-mode
+  :mode
+  (("\\.md\\'" . markdown-mode))
+  :config
+  (setq
+   ;; commonmarker command can be installed by "gem install -V commonmarker -n <destination directory>"
+   markdown-command "commonmarker --extension=autolink --extension=strikethrough --extension=table --extension=tagfilter --extension=tasklist"
+   markdown-command-needs-filename t
+   markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css"
+                        "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css")
+   markdown-xhtml-header-content (mapconcat 'identity
+                                            '("<style><!-- CSS HERE --></style>"
+                                              "<script src=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js\"></script>"
+                                              "<script>hljs.initHighlightingOnLoad();</script>")
+                                            "\n")
+   markdown-xhtml-body-preamble "<div class=\"markdown-body\">"
+   markdown-xhtml-body-epilogue "</div>")
+  (bind-keys :map markdown-mode-map
+             ("C-c d" . yh/insert-date)
+             ("C-c t" . yh/insert-time)
+             ("C-c u" . yh/insert-time2))
+  :hook
+  (markdown-mode . (lambda ()
+                     (yh-before-save :space :gap)
+                     (setq-local yh-space-width 1)
+                     (toggle-truncate-lines -1))))
+
+(use-package open-junk-file
+  :commands open-junk-file)
+
+(use-package poetry)
+
+(use-package prettier-js
+  :hook
+  (((js-mode css-mode tsx-mode) . prettier-js-mode)))
+
+(use-package projectile
+  :config
+  (projectile-mode 1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+(use-package py-autopep8
+  :hook (python-mode . py-autopep8-mode))
+
+(use-package pyenv-mode)
+
+(use-package pyenv-mode-auto :ensure nil)
+
+(use-package python
+  :ensure nil
+  :hook
+  (python-mode . (lambda ()
+                   (add-hook 'after-save-hook 'yh/make-executable nil t)))
+  (python-mode . (lambda ()
+                   (set (make-local-variable 'compile-command)
+                        (concat "pysen run_files lint --error-format gnu  " buffer-file-name)))))
+
+(use-package smartparens
+  :init
+  (smartparens-global-mode)
+  (show-smartparens-global-mode t)
+  (setq sp-no-reindent-after-kill-modes (cons 'makefile-bsdmake-mode sp-no-reindent-after-kill-modes))
+
+  :hook
+  ((c-mode-common
+    emacs-lisp-mode
+    python-mode
+    haskell-mode
+    hcl-mode
+    bazel-mode
+    js-mode
+    json-mode
+    sh-mode
+    tsx-mode) .
+    turn-on-smartparens-strict-mode)
+
+  :bind (("C-M-f" . sp-forward-slurp-sexp)
+         ("C-M-g" . sp-forward-barf-sexp)
+         ("C-c s" . smartparens-strict-mode)
+         :map emacs-lisp-mode-map
+         ("M-s-a" . sp-beginning-of-sexp)
+         ("M-s-e" . sp-end-of-sexp)))
+
+(use-package smartparens-config :ensure nil)
+
+(use-package stan-mode
+  :mode ("\\.stan\\'" . stan-mode)
+  :hook (stan-mode . stan-mode-setup)
+  :config
+  (setq stan-indentation-offset 2))
+
+(use-package stan-snippets
+  :hook (stan-mode . stan-snippets-initialize))
+
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t)
+  :custom
+  (undo-tree-auto-save-history nil))
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
+(use-package yaml-mode
+  :mode
+  (("\\.ya?ml\\'" . yaml-mode)))
+
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
+  (yas-global-mode 1))
+
+(use-package yatex
+
+  ;; cf. https://zenn.dev/maswag/books/latex-on-emacs/viewer/yatex
+  :commands (yatex-mode)
+  :mode (("\\.tex$" . yatex-mode)
+         ("\\.ltx$" . yatex-mode)
+         ("\\.cls$" . yatex-mode)
+         ("\\.sty$" . yatex-mode)
+         ("\\.clo$" . yatex-mode)
+         ("\\.bbl$" . yatex-mode))
+  :init
+  (setq YaTeX-inhibit-prefix-letter t)
+  ;; :config キーワードはライブラリをロードした後の設定などを記述します。
+  :config
+  (setq YaTeX-kanji-code nil)
+  (defvar YaTeX-latex-message-code 'utf-8)
+  (setq YaTeX-use-LaTeX2e t)
+  (setq YaTeX-use-AMS-LaTeX t)
+  (setq tex-command "mytex")
+  (setq tex-pdfview-command "/usr/bin/open -a Skim")
+  (auto-fill-mode 0)
+  ;; company-tabnineによる補完。companyについては後述
+  (set (make-local-variable 'company-backends) '(company-tabnine))
+  ;; keys
+  (add-hook 'yatex-mode-hook
+            #'(lambda ()
+                (local-set-key (kbd "C-c C-f") 'yh/insert-subscript)
+                (local-set-key (kbd "C-c C-g") 'yh/insert-superscript))))
+
+(use-package direx)
+
+(use-package dired-k
+  :hook
+  (dired-after-readin . dired-k-no-revert)
+  (dired-initial-position . dired-k)
+  :custom
+  (dired-k-human-readable t))
+
+(use-package hcl-mode)
+
+(use-package ppp)
+
+(use-package make-mode
+  :defer t
+  :config
+  (define-key makefile-mode-map (kbd "C-c C-j") 'yh-make-insert-var)
+  :hook
+  ((makefile-bsdmake-mode makefile-gmake-mode) .
+   (lambda ()
+     (yh-before-save :space :gap)
+     (smartparens-strict-mode))))
+
+(use-package sh-script
+  :mode
+  (("\\.sh\\'" . shell-script-mode)
+   ("\\.envrc\\'" . shell-script-mode))
+  :config
+  (define-key sh-mode-map (kbd "C-c C-j") 'yh-sh-insert-var)
+  :hook
+  (sh-mode . (lambda ()
+               (yh-before-save :space :gap :indent)))
+  (sh-mode . (lambda ()
+               (add-hook 'after-save-hook 'yh/make-executable nil t))))
+
+(use-package json-par
+  :hook
+  (json-mode . json-par-mode))
+
+(use-package swiper
+  :bind
+  (("M-s M-s" . swiper-thing-at-point)))
+
+(use-package ivy-hydra
+  :config
+  (setq ivy-read-action-function 'ivy-hydra-read-action))
+
+(use-package ivy
+  :bind
+  (("C-c m" . ivy-switch-buffer))
+  :init
+  (ivy-mode 1)
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  :config
+  (setq ivy-height 30)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package counsel
+  :bind
+  (("C-c a" . counsel-ag))
+  :config
+  (setq counsel-ag-base-command '("rg"  "--vimgrep" "--no-heading" "--smart-case" "%s"))
+  (setq enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode 1)
+  (counsel-mode 1))
+
+(use-package terraform-mode
+  :hook
+  (terraform-mode . (lambda ()
+                      (yh-before-save :space :gap))))
+
+(use-package helpful
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-c C-d" . helpful-at-point)
+   ("C-c F" . helpful-function))
+  :init
+  (setq counsel-describe-function-function 'helpful-callable)
+  (setq counsel-describe-variable-function 'helpful-variable))
+
+(use-package color-moccur)
+
+(use-package web-mode
+  :mode
+  (("\\.html\\'" . web-mode)))
+
+(use-package coverlay)
+
+(use-package origami)
+
+(use-package tree-sitter-langs)
+
+(use-package tree-sitter)
+
+(use-package tsi :ensure nil)
+
+(use-package graphql-mode)
+
+(use-package tsx-mode :ensure nil
+  :mode
+  (("\\.tsx?\\'" . tsx-mode))
+  :hook
+  (tsx-mode . (lambda ()
+                (setq-local
+                 open-paren-in-column-0-is-defun-start nil
+                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*")
+                (emojify-mode -1))))
+
+(use-package nginx-mode
+  :hook
+  (conf-mode . (lambda ()
+                 (when (string-match "nginx" (buffer-file-name))
+                   (nginx-mode))))
+  (nginx-mode . (lambda ()
+                  (yh-before-save :space :gap :indent))))
+
+(use-package org
+  :commands
+  (org-store-link)
+  :config
+  (setq org-adapt-indentation t
+        org-hide-leading-stars t
+        org-odd-levels-only t)
+  (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+  (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+  (define-key org-mode-map (kbd "C-c c") 'org-capture)
+  :hook
+  (org-mode . (lambda ()
+                (yh-before-save :space :gap))))
+
+(use-package ispell
+  :config
+  (define-key text-mode-map (kbd "M-TAB") nil))
 
 
 ;;; misc
@@ -327,7 +603,7 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(ace-window company flycheck lsp-mode f s zetasql-formatter yatex yaml-mode which-key web-mode tree-sitter terraform-mode swiper stan-snippets smartparens session pyenv-mode py-autopep8 projectile prettier-js ppp poetry origami open-junk-file nginx-mode magit lsp-ui lsp-pyright json-mode ivy-hydra highlight-indentation helpful haskell-mode graphql-mode gnu-elpa-keyring-update git-ps1-mode git-modes flymake-yaml flycheck-stan emojify eldoc-stan dockerfile-mode direx dired-k dap-mode coverlay company-stan color-moccur biblio bazel afternoon-theme)))
+   '(tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

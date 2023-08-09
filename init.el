@@ -516,8 +516,7 @@
   (tsx-mode . (lambda ()
                 (setq-local
                  open-paren-in-column-0-is-defun-start nil
-                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*")
-                (emojify-mode -1))))
+                 defun-prompt-regexp "\\(\\(function\\)\\|\\(type\\)\\) +.*"))))
 
 (use-package nginx-mode
   :hook
@@ -588,13 +587,6 @@
 (setenv "LANG" "ja_JP.UTF-8")
 (set-language-environment "Japanese")
 
-;; Theme loading should be after registration of it as safe by custom-set-variables
-(use-package afternoon-theme
-  :config
-  (load-theme 'afternoon))
-
-(provide 'init)
-;;; init.el ends here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -610,3 +602,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Theme loading should be after registration of it as safe by custom-set-variables
+(use-package afternoon-theme
+  :config
+  (load-theme 'afternoon))
+
+(provide 'init)
+;;; init.el ends here

@@ -47,9 +47,7 @@
 
 (use-package yh-fosi :ensure nil)
 
-;; emacs29になりdashが使えなくなったので、いったんコメントアウトしておく。
-;; todo: dashへの依存をなくす。
-;; (use-package yh-blog :ensure nil)
+(use-package yh-blog :ensure nil)
 
 (use-package yh-fef :ensure nil
   :hook

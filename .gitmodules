@@ -10,3 +10,6 @@
 [submodule "site-lisp/submodules/zetasql-formatter-el"]
 	path = site-lisp/submodules/zetasql-formatter-el
 	url = https://github.com/hotoku/zetasql-formatter-el
+[submodule "site-lisp/submodules/copilot.el"]
+	path = site-lisp/submodules/copilot.el
+	url = https://github.com/zerolfx/copilot.el

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# key: async
+# key: asyncmain
 # name: async
 # expand-env: ((yas/indent-line (quote fixed)) (yas/wrap-around-region (quote nil)))
 # --

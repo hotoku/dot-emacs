@@ -331,7 +331,6 @@
   :hook
   ((c-mode-common
     emacs-lisp-mode
-    python-mode
     haskell-mode
     hcl-mode
     bazel-mode

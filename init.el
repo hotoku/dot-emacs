@@ -289,7 +289,8 @@
   (markdown-mode . (lambda ()
                      (yh-before-save :space :gap)
                      (setq-local yh-space-width 1)
-                     (toggle-truncate-lines -1))))
+                     (toggle-truncate-lines -1)
+                     (turn-off-smartparens-mode))))
 
 (use-package open-junk-file
   :commands open-junk-file)

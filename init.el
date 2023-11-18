@@ -334,8 +334,9 @@
     haskell-mode
     hcl-mode
     bazel-mode
-    json-mode)
-   turn-on-smartparens-strict-mode)
+    json-mode
+    sh-mode) .
+    turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)

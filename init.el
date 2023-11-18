@@ -334,11 +334,8 @@
     haskell-mode
     hcl-mode
     bazel-mode
-    js-mode
-    json-mode
-    sh-mode
-    tsx-mode) .
-    turn-on-smartparens-strict-mode)
+    json-mode)
+   turn-on-smartparens-strict-mode)
 
   :bind (("C-M-f" . sp-forward-slurp-sexp)
          ("C-M-g" . sp-forward-barf-sexp)
@@ -601,7 +598,9 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update)))
+   '(editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update))
+ '(safe-local-variable-values
+   '((lsp-pyright-venv-path . "/Users/hotoku/.anyenv/envs/pyenv/versions/comp-dev"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

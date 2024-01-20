@@ -599,7 +599,7 @@
  '(custom-safe-themes
    '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update)))
+   '(zetasql-formatter editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

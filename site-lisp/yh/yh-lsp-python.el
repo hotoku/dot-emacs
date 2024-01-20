@@ -21,7 +21,7 @@ cf: https://github.com/ncaq/.emacs.d/blob/d1c8651f2683e110a6e4f7e3cd89c025812a6d
   (pyenv-mode-auto-hook)
   (cond
    ;; in poetry project
-   ((locate-dominating-file default-directory "pyproject.toml")
+   ((locate-dominating-file default-directory "poetry.lock")
     (message "opening python file. this is in a project of poetry")
     (setq-local lsp-pyright-venv-path
                 (poetry-get-virtualenv))

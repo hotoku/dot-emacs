@@ -607,12 +607,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background "AliceBlue" :foreground "DarkSlateGray4"))))
  )
-
-;; Theme loading should be after registration of it as safe by custom-set-variables
-(use-package afternoon-theme
-  :config
-  (load-theme 'afternoon))
 
 (provide 'init)
 ;;; init.el ends here

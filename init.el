@@ -597,17 +597,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
+   '("341d032755f41228aca0773b1c34e04b81be0f9fce1a6d3e348742ff98cab5f0" "c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
-   '(zetasql-formatter editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update))
+   '(srcery-theme zetasql-formatter editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update))
  '(safe-local-variable-values
    '((lsp-pyright-venv-path . "/Users/hotoku/.anyenv/envs/pyenv/versions/comp-dev"))))
+(load-theme 'srcery)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "#EBF0F2" :foreground "#403115")))))
-
+ '(font-lock-comment-face ((t (:foreground "red")))))
 (provide 'init)
 ;;; init.el ends here

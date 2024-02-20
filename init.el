@@ -548,6 +548,8 @@
   :config
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
 
+(use-package srcery-theme)
+
 
 ;;; misc
 ;; make backup files in a specific directory
@@ -597,21 +599,23 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("341d032755f41228aca0773b1c34e04b81be0f9fce1a6d3e348742ff98cab5f0" "c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
+   '("652f922b5c4fab704da86af3702cb9225005bcb18b8d0545cf9245b115798780" "c335adbb7d7cb79bc34de77a16e12d28e6b927115b992bccc109fb752a365c72" default))
  '(package-selected-packages
    '(srcery-theme zetasql-formatter editorconfig tree-sitter-langs origami coverlay web-mode color-moccur helpful terraform-mode counsel ivy-hydra swiper json-par ppp hcl-mode dired-k direx yatex yaml-mode which-key undo-tree stan-snippets smartparens pyenv-mode py-autopep8 projectile prettier-js poetry open-junk-file json-mode highlight-indentation afternoon-theme flymake-yaml flycheck-stan eldoc-stan dockerfile-mode dap-mode company-stan biblio bazel ace-window session company magit flycheck lsp-pyright lsp-ui lsp-mode f s gnu-elpa-keyring-update))
  '(safe-local-variable-values
    '((lsp-pyright-venv-path . "/Users/hotoku/.anyenv/envs/pyenv/versions/comp-dev"))))
 (load-theme 'srcery)
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:background "#EBF0F2" :foreground "#403115")))))
+(provide 'init)
+;;; init.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diered-diretory ((t (:foreground "color-81"))))
- '(dired-directory ((t (:background "black" :foreground "color-81"))))
- '(font-lock-builtin-face ((t (:foreground "color-81"))))
- '(font-lock-comment-face ((t (:foreground "color-219"))))
- '(markdown-markup-face ((t (:foreground "color-253" :weight normal)))))
-(provide 'init)
-;;; init.el ends here
+ )

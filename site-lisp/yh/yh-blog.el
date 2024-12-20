@@ -12,7 +12,9 @@
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
                ("JMB20200036" . ,(expand-file-name "~/projects/blog/_posts"))
                ("hotoku-macbookair-2019" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
-               ("hotoku-macbook-air-2022" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
+               ("hotoku-macbook-air-2022" . ,(expand-file-name "~/projects/hotoku/blog/_posts"))
+               ;;; sequoiaになって、hostnameがバグっているので苦肉の策
+               ("Macmini" . ,(expand-file-name "~/projects/hotoku/blog/_posts")))))
     (cdr (assoc (car (split-string (system-name) "\\.")) dic))))
 
 (defun yh-blog-header (title)
@@ -132,6 +134,11 @@ It can be registered in the file yh-blog.el"))
   "Execute build.sh in the blog project."
   (interactive)
   (compile (format "%s/../_plist/build.sh" yh-blog-posts-dir)))
+
+(defun yh-blog-diary ()
+  "Open new entry for diary."
+  (interactive)
+  (yh-blog-new nil "日記" (format-time-string "diary-%Y-%m-%d")))
 
 (provide 'yh-blog)
 ;;; yh-blog.el ends here
